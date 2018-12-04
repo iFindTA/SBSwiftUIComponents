@@ -1,0 +1,6 @@
+module Pods_SBSwiftUICoponents {
+  umbrella header "Pods-SBSwiftUICoponents-umbrella.h"
+
+  export *
+  module * { export * }
+}

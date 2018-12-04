@@ -1,0 +1,90 @@
+PODS:
+  - Alamofire (4.8.0)
+  - DTCoreText (1.6.21):
+    - DTCoreText/Core (= 1.6.21)
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTCoreText/Core (1.6.21):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.13)
+  - DTFoundation/DTAnimatedGIF (1.7.13)
+  - DTFoundation/DTHTMLParser (1.7.13):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.7.13):
+    - DTFoundation/Core
+  - ESPullToRefresh (2.7)
+  - GDPerformanceView-Swift (2.0.2)
+  - IQKeyboardManagerSwift (6.2.0)
+  - PPBadgeViewSwift (2.2.2)
+  - SBComponents/Base (0.6.0):
+    - ESPullToRefresh
+    - GDPerformanceView-Swift
+    - IQKeyboardManagerSwift
+    - PPBadgeViewSwift
+    - SBComponents/HTTPRouter
+  - SBComponents/Error (0.6.0)
+  - SBComponents/Extension (0.6.0):
+    - SnapKit
+  - SBComponents/HTTPRouter (0.6.0):
+    - Alamofire
+    - SBComponents/Error
+    - SBComponents/Hud
+    - SBComponents/Macros
+    - SwiftyJSON
+  - SBComponents/Hud (0.6.0):
+    - SBComponents/Macros
+  - SBComponents/Kit (0.6.0):
+    - SBComponents/Base
+    - SBComponents/Error
+    - Toaster
+  - SBComponents/Macros (0.6.0):
+    - SBComponents/Error
+    - SBComponents/Extension
+  - SDWebImage/Core (4.4.2)
+  - SnapKit (4.2.0)
+  - SwiftyJSON (4.2.0)
+  - Toaster (2.1.1)
+
+DEPENDENCIES:
+  - DTCoreText (~> 1.6.21)
+  - SBComponents/Base (~> 0.6.0)
+  - SBComponents/Kit (~> 0.6.0)
+  - SDWebImage/Core
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - DTCoreText
+    - DTFoundation
+    - ESPullToRefresh
+    - GDPerformanceView-Swift
+    - IQKeyboardManagerSwift
+    - PPBadgeViewSwift
+    - SBComponents
+    - SDWebImage
+    - SnapKit
+    - SwiftyJSON
+    - Toaster
+
+SPEC CHECKSUMS:
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
+  DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
+  ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
+  GDPerformanceView-Swift: a40b2f675589449f5b5082f3178f01bfdb7882ce
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  PPBadgeViewSwift: 96a41852df7437e9d948565a1bc894f757c29933
+  SBComponents: b0250b8594ca2ee4c9c588b9bacc895bf2aa75c9
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
+
+PODFILE CHECKSUM: 848137ac04a720ad3b799552e7ede3dd0a6e0d28
+
+COCOAPODS: 1.6.0.beta.2
