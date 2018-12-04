@@ -1,4 +1,17 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
+
+post_install do |installer|
+  # 需要指定编译版本的第三方的名称
+  exTargets = ['SnapKit', 'Toaster', 'ESPullToRefresh']
+  
+  installer.pods_project.targets.each do |target|
+    if exTargets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.0'
+      end
+    end
+  end
+end
 
 use_frameworks!
 
