@@ -1,4 +1,4 @@
-module SBComponents {
+framework module SBComponents {
   umbrella header "SBComponents-umbrella.h"
 
   export *

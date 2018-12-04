@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AB104C2B2F2F753795167D2 /* libPods-SBSwiftUICoponents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AF4C1E2F7A844D940A290 /* libPods-SBSwiftUICoponents.a */; };
 		609C436021B60F0F001414AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C435F21B60F0F001414AD /* AppDelegate.swift */; };
 		609C436221B60F0F001414AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C436121B60F0F001414AD /* ViewController.swift */; };
 		609C436521B60F0F001414AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 609C436321B60F0F001414AD /* Main.storyboard */; };
@@ -15,6 +14,16 @@
 		609C436A21B60F12001414AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 609C436821B60F12001414AD /* LaunchScreen.storyboard */; };
 		609C437521B60F12001414AD /* SBSwiftUICoponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C437421B60F12001414AD /* SBSwiftUICoponentsTests.swift */; };
 		609C438021B60F12001414AD /* SBSwiftUICoponentsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C437F21B60F12001414AD /* SBSwiftUICoponentsUITests.swift */; };
+		609C439121B61199001414AD /* RichTextPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C438F21B61199001414AD /* RichTextPanel.swift */; };
+		609C439221B61199001414AD /* StepperPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C439021B61199001414AD /* StepperPanel.swift */; };
+		609C439421B611FA001414AD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439321B611FA001414AD /* libz.tbd */; };
+		609C439621B611FF001414AD /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439521B611FF001414AD /* libresolv.tbd */; };
+		609C439821B61205001414AD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439721B61204001414AD /* libc++.tbd */; };
+		609C439A21B6120C001414AD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439921B6120C001414AD /* CoreText.framework */; };
+		609C439C21B61213001414AD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439B21B61213001414AD /* CoreTelephony.framework */; };
+		609C439E21B61219001414AD /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439D21B61219001414AD /* CoreMotion.framework */; };
+		609C43A021B6121E001414AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439F21B6121E001414AD /* CFNetwork.framework */; };
+		609C43A221B6125F001414AD /* Pods_SBSwiftUICoponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +57,19 @@
 		609C437B21B60F12001414AD /* SBSwiftUICoponentsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBSwiftUICoponentsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		609C437F21B60F12001414AD /* SBSwiftUICoponentsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBSwiftUICoponentsUITests.swift; sourceTree = "<group>"; };
 		609C438121B60F12001414AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		609C438F21B61199001414AD /* RichTextPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextPanel.swift; sourceTree = "<group>"; };
+		609C439021B61199001414AD /* StepperPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperPanel.swift; sourceTree = "<group>"; };
+		609C439321B611FA001414AD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		609C439521B611FF001414AD /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		609C439721B61204001414AD /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		609C439921B6120C001414AD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		609C439B21B61213001414AD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		609C439D21B61219001414AD /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		609C439F21B6121E001414AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E4B9DFC5F4C27A699B3ED01 /* Pods-SBSwiftUICoponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.release.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.release.xcconfig"; sourceTree = "<group>"; };
-		970AF4C1E2F7A844D940A290 /* libPods-SBSwiftUICoponents.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBSwiftUICoponents.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B690E7899283AA027B26AE95 /* Pods-SBSwiftUICoponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.debug.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.debug.xcconfig"; sourceTree = "<group>"; };
+		E0FE4CDB36AEC05F780CCDBC /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +77,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AB104C2B2F2F753795167D2 /* libPods-SBSwiftUICoponents.a in Frameworks */,
+				609C43A221B6125F001414AD /* Pods_SBSwiftUICoponents.framework in Frameworks */,
+				609C43A021B6121E001414AD /* CFNetwork.framework in Frameworks */,
+				609C439E21B61219001414AD /* CoreMotion.framework in Frameworks */,
+				609C439C21B61213001414AD /* CoreTelephony.framework in Frameworks */,
+				609C439A21B6120C001414AD /* CoreText.framework in Frameworks */,
+				609C439821B61205001414AD /* libc++.tbd in Frameworks */,
+				609C439621B611FF001414AD /* libresolv.tbd in Frameworks */,
+				609C439421B611FA001414AD /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +130,7 @@
 		609C435E21B60F0F001414AD /* SBSwiftUICoponents */ = {
 			isa = PBXGroup;
 			children = (
+				609C438D21B6116C001414AD /* SBComponents */,
 				609C435F21B60F0F001414AD /* AppDelegate.swift */,
 				609C436121B60F0F001414AD /* ViewController.swift */,
 				609C436321B60F0F001414AD /* Main.storyboard */,
@@ -132,10 +159,35 @@
 			path = SBSwiftUICoponentsUITests;
 			sourceTree = "<group>";
 		};
+		609C438D21B6116C001414AD /* SBComponents */ = {
+			isa = PBXGroup;
+			children = (
+				609C438E21B61178001414AD /* SBPanels */,
+			);
+			path = SBComponents;
+			sourceTree = "<group>";
+		};
+		609C438E21B61178001414AD /* SBPanels */ = {
+			isa = PBXGroup;
+			children = (
+				609C438F21B61199001414AD /* RichTextPanel.swift */,
+				609C439021B61199001414AD /* StepperPanel.swift */,
+			);
+			path = SBPanels;
+			sourceTree = "<group>";
+		};
 		60BF065CE6F6451D0EBBF0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				970AF4C1E2F7A844D940A290 /* libPods-SBSwiftUICoponents.a */,
+				609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */,
+				609C439F21B6121E001414AD /* CFNetwork.framework */,
+				609C439D21B61219001414AD /* CoreMotion.framework */,
+				609C439B21B61213001414AD /* CoreTelephony.framework */,
+				609C439921B6120C001414AD /* CoreText.framework */,
+				609C439721B61204001414AD /* libc++.tbd */,
+				609C439521B611FF001414AD /* libresolv.tbd */,
+				609C439321B611FA001414AD /* libz.tbd */,
+				E0FE4CDB36AEC05F780CCDBC /* Pods_SBSwiftUICoponents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -146,7 +198,6 @@
 				B690E7899283AA027B26AE95 /* Pods-SBSwiftUICoponents.debug.xcconfig */,
 				7E4B9DFC5F4C27A699B3ED01 /* Pods-SBSwiftUICoponents.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -161,7 +212,7 @@
 				609C435821B60F0F001414AD /* Sources */,
 				609C435921B60F0F001414AD /* Frameworks */,
 				609C435A21B60F0F001414AD /* Resources */,
-				B9B176B6DA8AA85AE22591C0 /* [CP] Copy Pods Resources */,
+				E54E1E01A4ECB52F3BF27A17 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,30 +330,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B9B176B6DA8AA85AE22591C0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/ESPullToRefresh/ESPullToRefresh.bundle",
-				"${PODS_ROOT}/IQKeyboardManagerSwift/IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ESPullToRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DB0AAFDBF2BCCA811D26C53F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -325,6 +352,50 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E54E1E01A4ECB52F3BF27A17 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
+				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
+				"${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/PPBadgeViewSwift/PPBadgeViewSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SBComponents/SBComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDPerformanceView_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PPBadgeViewSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SBComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -332,8 +403,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C439221B61199001414AD /* StepperPanel.swift in Sources */,
 				609C436221B60F0F001414AD /* ViewController.swift in Sources */,
 				609C436021B60F0F001414AD /* AppDelegate.swift in Sources */,
+				609C439121B61199001414AD /* RichTextPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,7 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.landun.SBSwiftUICoponents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -539,7 +612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.landun.SBSwiftUICoponents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

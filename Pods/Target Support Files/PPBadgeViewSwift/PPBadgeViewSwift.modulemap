@@ -1,4 +1,4 @@
-module PPBadgeViewSwift {
+framework module PPBadgeViewSwift {
   umbrella header "PPBadgeViewSwift-umbrella.h"
 
   export *

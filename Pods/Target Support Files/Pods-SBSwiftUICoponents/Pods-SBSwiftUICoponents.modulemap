@@ -1,4 +1,4 @@
-module Pods_SBSwiftUICoponents {
+framework module Pods_SBSwiftUICoponents {
   umbrella header "Pods-SBSwiftUICoponents-umbrella.h"
 
   export *

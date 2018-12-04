@@ -1,4 +1,4 @@
-module Toaster {
+framework module Toaster {
   umbrella header "Toaster-umbrella.h"
 
   export *
