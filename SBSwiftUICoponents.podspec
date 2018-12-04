@@ -25,10 +25,6 @@ Pod::Spec.new do |s|
     cm.dependency 'GDPerformanceView-Swift'
   end
   ## custom uis
-  s.subspec 'Hud' do |hd|
-    hd.source_files = "SBComponents/SBHud/*.swift"
-    hd.dependency 'SBComponents/Macros'
-  end
 
   s.subspec 'Banner' do |bn|
     bn.source_files = "SBComponents/SBBanner/*.swift"
@@ -52,6 +48,7 @@ Pod::Spec.new do |s|
     ss.dependency 'SDWebImage/Core'
   end
 
+  # 暂时不用更新，可继续使用 SBComponents/Scan~>0.6.0
   s.subspec 'Scan' do |q|
     q.source_files = "SBComponents/SBScan/*.swift"
     q.resources = "SBComponents/SBScan/Assets/*.*"
