@@ -2,7 +2,7 @@ platform :ios, '10.0'
 
 # hook for install
 post_install do |installer|
-  exTargets = ['SnapKit', 'Toaster', 'SBComponents', 'DTCoreText', 'DTFoundation', 'ESPullToRefresh']
+  exTargets = ['Toaster', 'SBComponents', 'DTCoreText', 'DTFoundation']
   installer.pods_project.targets.each do |target|
     if exTargets.include? target.name
       target.build_configurations.each do |config|
