@@ -57,6 +57,7 @@
 		609C43F921B66A44001414AD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43F021B66A44001414AD /* Share.swift */; };
 		609C43FC21B66B02001414AD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43FB21B66B02001414AD /* SystemConfiguration.framework */; };
 		609C43FE21B66B84001414AD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43FD21B66B83001414AD /* libsqlite3.tbd */; };
+		609C440121B6707A001414AD /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C440021B6707A001414AD /* Commons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		609C43FA21B66A74001414AD /* SBUIComponents-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBUIComponents-bridge-header.h"; sourceTree = "<group>"; };
 		609C43FB21B66B02001414AD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		609C43FD21B66B83001414AD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		609C440021B6707A001414AD /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
 		7E4B9DFC5F4C27A699B3ED01 /* Pods-SBSwiftUICoponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.release.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.release.xcconfig"; sourceTree = "<group>"; };
 		B690E7899283AA027B26AE95 /* Pods-SBSwiftUICoponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.debug.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FE4CDB36AEC05F780CCDBC /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,9 +209,19 @@
 		609C435E21B60F0F001414AD /* SBSwiftUICoponents */ = {
 			isa = PBXGroup;
 			children = (
+				609C43FF21B67064001414AD /* SBCommons */,
+				609C43EF21B66A44001414AD /* SBShare */,
+				609C43DE21B66A44001414AD /* SBTPlatform */,
+				609C43B621B65923001414AD /* SBAudioIndicator */,
+				609C43BE21B65923001414AD /* SBBrowser */,
+				609C43B221B65923001414AD /* SBEmpty */,
+				609C43B821B65923001414AD /* SBNavigator */,
+				609C43BA21B65923001414AD /* SBScan */,
+				609C43AB21B64EEB001414AD /* SBBanner */,
+				609C43A521B64EEB001414AD /* SBScenes */,
+				609C438E21B61178001414AD /* SBPanels */,
 				609C43D321B66800001414AD /* Tests */,
 				609C43D021B666CF001414AD /* Resource */,
-				609C438D21B6116C001414AD /* SBComponents */,
 				609C435F21B60F0F001414AD /* AppDelegate.swift */,
 				609C436121B60F0F001414AD /* ViewController.swift */,
 				609C43FA21B66A74001414AD /* SBUIComponents-bridge-header.h */,
@@ -239,23 +251,6 @@
 			path = SBSwiftUICoponentsUITests;
 			sourceTree = "<group>";
 		};
-		609C438D21B6116C001414AD /* SBComponents */ = {
-			isa = PBXGroup;
-			children = (
-				609C43EF21B66A44001414AD /* SBShare */,
-				609C43DE21B66A44001414AD /* SBTPlatform */,
-				609C43B621B65923001414AD /* SBAudioIndicator */,
-				609C43BE21B65923001414AD /* SBBrowser */,
-				609C43B221B65923001414AD /* SBEmpty */,
-				609C43B821B65923001414AD /* SBNavigator */,
-				609C43BA21B65923001414AD /* SBScan */,
-				609C43AB21B64EEB001414AD /* SBBanner */,
-				609C43A521B64EEB001414AD /* SBScenes */,
-				609C438E21B61178001414AD /* SBPanels */,
-			);
-			path = SBComponents;
-			sourceTree = "<group>";
-		};
 		609C438E21B61178001414AD /* SBPanels */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,9 +263,9 @@
 		609C43A521B64EEB001414AD /* SBScenes */ = {
 			isa = PBXGroup;
 			children = (
+				609C43A821B64EEB001414AD /* Assets */,
 				609C43A621B64EEB001414AD /* CenterMaskScene.swift */,
 				609C43A721B64EEB001414AD /* CommentOnScene.swift */,
-				609C43A821B64EEB001414AD /* Assets */,
 				609C43AA21B64EEB001414AD /* PresentMaskScene.swift */,
 			);
 			path = SBScenes;
@@ -445,6 +440,14 @@
 				609C43F021B66A44001414AD /* Share.swift */,
 			);
 			path = SBShare;
+			sourceTree = "<group>";
+		};
+		609C43FF21B67064001414AD /* SBCommons */ = {
+			isa = PBXGroup;
+			children = (
+				609C440021B6707A001414AD /* Commons.swift */,
+			);
+			path = SBCommons;
 			sourceTree = "<group>";
 		};
 		60BF065CE6F6451D0EBBF0C3 /* Frameworks */ = {
@@ -707,6 +710,7 @@
 				609C43F921B66A44001414AD /* Share.swift in Sources */,
 				609C439221B61199001414AD /* StepperPanel.swift in Sources */,
 				609C43C921B65923001414AD /* Navigator.swift in Sources */,
+				609C440121B6707A001414AD /* Commons.swift in Sources */,
 				609C43CD21B65923001414AD /* Activities.swift in Sources */,
 				609C436221B60F0F001414AD /* ViewController.swift in Sources */,
 				609C43CC21B65923001414AD /* Browser.swift in Sources */,
