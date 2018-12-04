@@ -60,7 +60,7 @@ Pod::Spec.new do |s|
   s.subspec 'Empty' do |p|
     p.source_files = "SBComponents/SBEmpty/*.swift"
     p.resources = "SBComponents/SBEmpty/Assets/*.*"
-    p.dependency 'DZNEmptyDataSet'
+    p.dependency 'EmptyDataSet-Swift'
     p.dependency 'SBComponents/Base'
     p.dependency 'SBComponents/HTTPState'
   end
