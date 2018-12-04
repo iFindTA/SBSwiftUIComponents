@@ -10,7 +10,7 @@ import SnapKit
 import SBComponents
 
 class ViewController: UIViewController {
-
+    /// vars
     private var navigator: FixedNavigator?
     
     override func viewDidLoad() {

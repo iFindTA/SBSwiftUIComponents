@@ -64,12 +64,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    /// third-apps callback
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handle = TPOpen.shared.handle(url)
+        return handle
+    }
 
     /// start services
     private func startServices() {
         _ = SBHTTPState.shared.isReachable()
         SBHTTPRouter.shared.challengeNetworkPermission()
         
+        BallLoading.configure()
+        TPOpen.shared.install()
     }
 }
 
