@@ -658,6 +658,14 @@ extension TPOpen {
     }
     /// 分享音乐（sdk）
     private func preShareMusic(_ platform: TPlatform, title: String, desciption desc: String, icon uri: String, hybrid link: String, binary file: String, profile: UIViewController) {
+        /// qq分享音频
+        guard platform != .qq else {
+            let obj = QQApiAudioObject(url: URL(string: file)!, title: title, description: desc, previewImageURL: URL(string: uri)!, targetContentType: QQApiURLTargetTypeAudio)
+            let req = SendMessageToQQReq(content: obj)
+            let code = QQApiInterface.send(req)
+            debugPrint("code:\(code.rawValue)")
+            return
+        }
         BallLoading.show()
         SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
             BallLoading.hide()
@@ -688,12 +696,6 @@ extension TPOpen {
             req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
             req.message = msg
             WXApi.send(req)
-        } else if platform == .qq {
-            let data = source.jpegData(compressionQuality: 1)
-            let obj = QQApiNewsObject.object(with: URL(string: link)!, title: title, description: desc, previewImageData: data)
-            let req = SendMessageToQQReq(content: obj as? QQApiObject)
-            let code = QQApiInterface.send(req)
-            debugPrint("code:\(code.rawValue)")
         }
     }
 }
