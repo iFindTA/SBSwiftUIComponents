@@ -107,7 +107,7 @@ public class TPOpen: NSObject {
     
     /// 注册IDs
     public func install() {
-        WXApi.registerApp(THIRD_WX_APPID)
+        WXApi.registerApp(THIRD_WX_APPID, enableMTA: false)
         qqAuth = TencentOAuth(appId: THIRD_QQ_APPID, andDelegate: TQQHandler.shared)
     }
     public func isInstalled(_ type: TPlatform) -> Bool {
@@ -154,224 +154,6 @@ public class TPOpen: NSObject {
         
         return true
     }
-}
-
-// MARK: - 第三方授权
-extension TPOpen {
-    /// 三方登录
-    public func oauth(_ platform: TPlatform, completion:@escaping ErrorClosure) {
-        /// weak reference
-        callback = completion
-        
-        switch platform {
-        case .qq:
-            debugPrint("qq oauth")
-            let grants: [Any] = [kOPEN_PERMISSION_GET_INFO]
-            qqAuth?.authorize(grants)
-        case .wxSession, .wxTimeline, .wxFavorite:
-            let req = SendAuthReq()
-            req.scope = "snsapi_userinfo"
-            req.state = "auth2_wx"
-            WXApi.send(req)
-        default:
-            debugPrint("unkown platform to oauth!")
-        }
-    }
-}
-
-// MARK: - 第三方支付
-extension TPOpen {
-    /// 支付
-    public func pay(_ order: JSON?, payment way: PPlatform, completion:@escaping ErrorClosure) {
-        /// weak refrerence
-        callback = completion
-        
-        guard let json = order else {
-            let err = BaseError("创建订单失败！")
-            completion(err)
-            return
-        }
-        
-        switch way {
-        case .ali:
-            //let orderNum = json["orderNo"]
-            let signature = json["sign"]
-            debugPrint("ali order sign:\(signature.stringValue)")
-            AlipaySDK.defaultService().payOrder(signature.stringValue, fromScheme: THIRD_Ali_APPID) { _ in /*called by web pay*/}
-        case .wechat:
-            let req = PayReq()
-            req.partnerId = json["mch_id"].stringValue//商户ID
-            req.prepayId = json["prepay_id"].stringValue
-            req.package = "Sign=WXPay"
-            req.nonceStr = json["nonce_str"].stringValue
-            req.timeStamp = json["timeStamp"].uInt32Value
-            req.sign = json["sign"].stringValue
-            WXApi.send(req)
-        default:
-            debugPrint("unknown payment!")
-        }
-    }
-}
-
-// MARK: - 第三方分享
-extension TPOpen {
-    /// 分享网页链接
-    public func shareLink(_ platform: [TPlatform], title: String, desciption desc: String, icon uri: String, hybrid link: String, profile: UIViewController, completion:@escaping ErrorClosure) {
-        /// weak refrerence
-        callback = completion
-        
-        let qqInstalled = isInstalled(.qq)
-        let wxInstalled = isInstalled(.wxSession)
-        if qqInstalled && wxInstalled {
-            var p = SBParameter()
-            p["platforms"] = platform
-            let plater = TPShareProfile(p)
-            let rooter = BaseNavigationProfile(rootViewController: plater)
-            rooter.view.backgroundColor = ClearBgColor
-            rooter.modalPresentationStyle = .overCurrentContext
-            rooter.setNavigationBarHidden(true, animated: true)
-            let animation = CATransition()
-            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            animation.type = CATransitionType(rawValue: "Reveal")
-            animation.subtype = .fromTop
-            animation.duration = Macros.APP_ANIMATE_INTERVAL
-            UIApplication.shared.keyWindow?.layer.add(animation, forKey: nil)
-            profile.present(rooter, animated: true, completion: nil)
-            plater.platClosure = {[weak self](platform) in
-                self?.shareLinkThrid(platform, title: title, desciption: desc, icon: uri, hybrid: link)
-            }
-            plater.cancelClosure = {[weak self] in
-                self?.callback?(nil)
-            }
-            return
-        }
-        shareLinkSystem(title: title, desciption: desc, icon: uri, hybrid: link, profile: profile)
-    }
-    /// 分享链接（系统）
-    private func shareLinkSystem(title: String, desciption desc: String, icon uri: String, hybrid link: String, profile: UIViewController) {
-        var image: UIImage = UIImage()
-        if let i = UIImage(named: "AppIcon") {
-            image = i
-        }
-        
-        let items:[Any] = [title, desc, image, link]
-        let shreProfile = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        shreProfile.excludedActivityTypes = [.mail, .print, .airDrop, .message, .postToVimeo, .postToFlickr, .postToTwitter, .assignToContact, .saveToCameraRoll, .addToReadingList, .copyToPasteboard, .postToTencentWeibo]
-        shreProfile.completionWithItemsHandler = { [weak self](type, completed, returnItems, error) in
-            var err: BaseError?
-            if completed == false, let e = error {
-                err = BaseError(e.localizedDescription)
-            }
-            self?.callback?(err)
-        }
-        profile.present(shreProfile, animated: true, completion: nil)
-    }
-    /// 分享链接（sdk）
-    private func shareLinkThrid(_ platform: TPlatform, title: String, desciption desc: String, icon uri: String, hybrid link: String) {
-        BallLoading.show()
-        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
-            BallLoading.hide()
-            guard let icon = image else {
-                let e = BaseError("分享图片数据错误！")
-                self?.callback?(e)
-                return
-            }
-            /// compress
-            let compressed = icon.sb_compress(32768)
-            //            guard let compressed = icon.sb_compress(32768) else {
-            //                debugPrint("failed compress")
-            //                let e = BaseError("failed compress")
-            //                self?.callback?(e)
-            //                return
-            //            }
-            /// share
-            self?.realShareLink(platform, title: title, desciption: desc, icon: compressed, hybrid: link)
-        }
-    }
-    private func realShareLink(_ platform: TPlatform, title: String, desciption desc: String, icon source: UIImage, hybrid link: String) {
-        if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
-            let msg = WXMediaMessage()
-            msg.title = title
-            msg.description = desc
-            msg.setThumbImage(source)
-            let webp = WXWebpageObject()
-            webp.webpageUrl = link
-            msg.mediaObject = webp
-            let req = SendMessageToWXReq()
-            req.bText = false
-            req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
-            req.message = msg
-            WXApi.send(req)
-        } else if platform == .qq {
-            let data = source.jpegData(compressionQuality: 1)
-            let obj = QQApiNewsObject.object(with: URL(string: link)!, title: title, description: desc, previewImageData: data)
-            let req = SendMessageToQQReq(content: obj as? QQApiObject)
-            let code = QQApiInterface.send(req)
-            debugPrint("code:\(code.rawValue)")
-        }
-    }
-    
-    /// 分享纯图片
-    public func shareImage(_ platform: TPlatform, icon source: UIImage, profile: UIViewController, completion:@escaping ErrorClosure) {
-        
-        let qqInstalled = isInstalled(.qq)
-        let wxInstalled = isInstalled(.wxSession)
-        if qqInstalled && wxInstalled {
-            guard let data = source.jpegData(compressionQuality: 1) else {
-                let e = BaseError("failed convert image to data binary!")
-                completion(e)
-                return
-            }
-            let preSize = CGSize(width: AppSize.HEIGHT_CELL, height: AppSize.HEIGHT_CELL)
-            var thumbData: Data?
-            if let previous = source.sb_resize(preSize), let p = previous.jpegData(compressionQuality: 1) {
-                thumbData = p
-            }
-            realShareImage(platform, icon: data, thumb: thumbData)
-            return
-        }
-        shareImageSystem(source, profile: profile)
-    }
-    private func shareImageSystem(_ icon: UIImage, profile: UIViewController) {
-        let items:[Any] = [icon]
-        let shreProfile = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        shreProfile.excludedActivityTypes = [.mail, .print, .airDrop, .message, .postToVimeo, .postToFlickr, .postToTwitter, .assignToContact, .saveToCameraRoll, .addToReadingList, .copyToPasteboard, .postToTencentWeibo]
-        shreProfile.completionWithItemsHandler = { [weak self](type, completed, returnItems, error) in
-            var err: BaseError?
-            if completed == false, let e = error {
-                err = BaseError(e.localizedDescription)
-            }
-            self?.callback?(err)
-        }
-        profile.present(shreProfile, animated: true, completion: nil)
-    }
-    private func realShareImage(_ platform: TPlatform, icon source: Data, thumb data: Data?) {
-        if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
-            let msg = WXMediaMessage()
-            let obj = WXImageObject()
-            obj.imageData = source
-            msg.mediaObject = obj
-            if let thumb = data {
-                msg.thumbData = thumb
-            }
-            let req = SendMessageToWXReq()
-            req.bText = false
-            req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
-            req.message = msg
-            WXApi.send(req)
-        } else if platform == .qq {
-            let obj = QQApiImageObject(data: source, previewImageData: source, title: "", description: "")
-            if let thumb = data {
-                obj?.previewImageData = thumb
-            }
-            let req = SendMessageToQQReq(content: obj)
-            let code = QQApiInterface.send(req)
-            debugPrint("code:\(code.rawValue)")
-        }
-    }
-    
-    /// 分享多媒体-音乐
-    
 }
 
 // MARK: - QQ SDK回调
@@ -627,4 +409,291 @@ class TUniversalHandler: NSObject {
 //        let err = SBSceneRouter.route2(scene, params: p)
 //        Kits.handleError(err)
 //    }
+}
+
+// MARK: - 第三方授权
+extension TPOpen {
+    /// 三方登录
+    public func oauth(_ platform: TPlatform, completion:@escaping ErrorClosure) {
+        /// weak reference
+        callback = completion
+        
+        switch platform {
+        case .qq:
+            debugPrint("qq oauth")
+            let grants: [Any] = [kOPEN_PERMISSION_GET_INFO]
+            qqAuth?.authorize(grants)
+        case .wxSession, .wxTimeline, .wxFavorite:
+            let req = SendAuthReq()
+            req.scope = "snsapi_userinfo"
+            req.state = "auth2_wx"
+            WXApi.send(req)
+        default:
+            debugPrint("unkown platform to oauth!")
+        }
+    }
+}
+
+// MARK: - 第三方支付
+extension TPOpen {
+    public func pay(_ order: JSON?, payment way: PPlatform, completion:@escaping ErrorClosure) {
+        /// weak refrerence
+        callback = completion
+        
+        guard let json = order else {
+            let err = BaseError("创建订单失败！")
+            completion(err)
+            return
+        }
+        
+        switch way {
+        case .ali:
+            //let orderNum = json["orderNo"]
+            let signature = json["sign"]
+            debugPrint("ali order sign:\(signature.stringValue)")
+            AlipaySDK.defaultService().payOrder(signature.stringValue, fromScheme: THIRD_Ali_APPID) { _ in /*called by web pay*/}
+        case .wechat:
+            let req = PayReq()
+            req.partnerId = json["mch_id"].stringValue//商户ID
+            req.prepayId = json["prepay_id"].stringValue
+            req.package = "Sign=WXPay"
+            req.nonceStr = json["nonce_str"].stringValue
+            req.timeStamp = json["timeStamp"].uInt32Value
+            req.sign = json["sign"].stringValue
+            WXApi.send(req)
+        default:
+            debugPrint("unknown payment!")
+        }
+    }
+}
+
+// MARK: - 第三方分享
+extension TPOpen {
+    /// 分享网页链接
+    public func shareLink(_ platform: [TPlatform], title: String, desciption desc: String, icon uri: String, hybrid link: String, profile: UIViewController, completion:@escaping ErrorClosure) {
+        /// weak refrerence
+        callback = completion
+        
+        let qqInstalled = isInstalled(.qq)
+        let wxInstalled = isInstalled(.wxSession)
+        if qqInstalled && wxInstalled {
+            var p = SBParameter()
+            p["platforms"] = platform
+            let plater = TPShareProfile(p)
+            let rooter = BaseNavigationProfile(rootViewController: plater)
+            rooter.view.backgroundColor = ClearBgColor
+            rooter.modalPresentationStyle = .overCurrentContext
+            rooter.setNavigationBarHidden(true, animated: true)
+            let animation = CATransition()
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animation.type = CATransitionType(rawValue: "Reveal")
+            animation.subtype = .fromTop
+            animation.duration = Macros.APP_ANIMATE_INTERVAL
+            UIApplication.shared.keyWindow?.layer.add(animation, forKey: nil)
+            profile.present(rooter, animated: true, completion: nil)
+            plater.platClosure = {[weak self](platform) in
+                self?.shareLinkThrid(platform, title: title, desciption: desc, icon: uri, hybrid: link)
+            }
+            plater.cancelClosure = {[weak self] in
+                self?.callback?(nil)
+            }
+            return
+        }
+        shareLinkSystem(title: title, desciption: desc, icon: uri, hybrid: link, profile: profile)
+    }
+    /// 分享链接（系统）
+    private func shareLinkSystem(title: String, desciption desc: String, icon uri: String, hybrid link: String, profile: UIViewController) {
+        var image: UIImage = UIImage()
+        if let i = UIImage(named: "AppIcon") {
+            image = i
+        }
+        
+        let items:[Any] = [title, desc, image, link]
+        let shreProfile = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        shreProfile.excludedActivityTypes = [.mail, .print, .airDrop, .message, .postToVimeo, .postToFlickr, .postToTwitter, .assignToContact, .saveToCameraRoll, .addToReadingList, .copyToPasteboard, .postToTencentWeibo]
+        shreProfile.completionWithItemsHandler = { [weak self](type, completed, returnItems, error) in
+            var err: BaseError?
+            if completed == false, let e = error {
+                err = BaseError(e.localizedDescription)
+            }
+            self?.callback?(err)
+        }
+        profile.present(shreProfile, animated: true, completion: nil)
+    }
+    /// 分享链接（sdk）
+    private func shareLinkThrid(_ platform: TPlatform, title: String, desciption desc: String, icon uri: String, hybrid link: String) {
+        BallLoading.show()
+        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+            BallLoading.hide()
+            guard let icon = image else {
+                let e = BaseError("分享图片数据错误！")
+                self?.callback?(e)
+                return
+            }
+            /// compress
+            let compressed = icon.sb_compress(32768)
+            //            guard let compressed = icon.sb_compress(32768) else {
+            //                debugPrint("failed compress")
+            //                let e = BaseError("failed compress")
+            //                self?.callback?(e)
+            //                return
+            //            }
+            /// share
+            self?.realShareLink(platform, title: title, desciption: desc, icon: compressed, hybrid: link)
+        }
+    }
+    private func realShareLink(_ platform: TPlatform, title: String, desciption desc: String, icon source: UIImage, hybrid link: String) {
+        if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
+            let msg = WXMediaMessage()
+            msg.title = title
+            msg.description = desc
+            msg.setThumbImage(source)
+            let webp = WXWebpageObject()
+            webp.webpageUrl = link
+            msg.mediaObject = webp
+            let req = SendMessageToWXReq()
+            req.bText = false
+            req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
+            req.message = msg
+            WXApi.send(req)
+        } else if platform == .qq {
+            let data = source.jpegData(compressionQuality: 1)
+            let obj = QQApiNewsObject.object(with: URL(string: link)!, title: title, description: desc, previewImageData: data)
+            let req = SendMessageToQQReq(content: obj as? QQApiObject)
+            let code = QQApiInterface.send(req)
+            debugPrint("code:\(code.rawValue)")
+        }
+    }
+    
+    /// 分享纯图片
+    public func shareImage(_ platform: TPlatform, icon source: UIImage, profile: UIViewController, completion:@escaping ErrorClosure) {
+        
+        let qqInstalled = isInstalled(.qq)
+        let wxInstalled = isInstalled(.wxSession)
+        if qqInstalled && wxInstalled {
+            guard let data = source.jpegData(compressionQuality: 1) else {
+                let e = BaseError("failed convert image to data binary!")
+                completion(e)
+                return
+            }
+            let preSize = CGSize(width: AppSize.HEIGHT_CELL, height: AppSize.HEIGHT_CELL)
+            var thumbData: Data?
+            if let previous = source.sb_resize(preSize), let p = previous.jpegData(compressionQuality: 1) {
+                thumbData = p
+            }
+            realShareImage(platform, icon: data, thumb: thumbData)
+            return
+        }
+        shareImageSystem(source, profile: profile)
+    }
+    private func shareImageSystem(_ icon: UIImage, profile: UIViewController) {
+        let items:[Any] = [icon]
+        let shreProfile = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        shreProfile.excludedActivityTypes = [.mail, .print, .airDrop, .message, .postToVimeo, .postToFlickr, .postToTwitter, .assignToContact, .saveToCameraRoll, .addToReadingList, .copyToPasteboard, .postToTencentWeibo]
+        shreProfile.completionWithItemsHandler = { [weak self](type, completed, returnItems, error) in
+            var err: BaseError?
+            if completed == false, let e = error {
+                err = BaseError(e.localizedDescription)
+            }
+            self?.callback?(err)
+        }
+        profile.present(shreProfile, animated: true, completion: nil)
+    }
+    private func realShareImage(_ platform: TPlatform, icon source: Data, thumb data: Data?) {
+        if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
+            let msg = WXMediaMessage()
+            let obj = WXImageObject()
+            obj.imageData = source
+            msg.mediaObject = obj
+            if let thumb = data {
+                msg.thumbData = thumb
+            }
+            let req = SendMessageToWXReq()
+            req.bText = false
+            req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
+            req.message = msg
+            WXApi.send(req)
+        } else if platform == .qq {
+            let obj = QQApiImageObject(data: source, previewImageData: source, title: "", description: "")
+            if let thumb = data {
+                obj?.previewImageData = thumb
+            }
+            let req = SendMessageToQQReq(content: obj)
+            let code = QQApiInterface.send(req)
+            debugPrint("code:\(code.rawValue)")
+        }
+    }
+    
+    /// 分享多媒体-音乐
+    public func shareMusic(_ title: String, desciption desc: String, icon uri: String, hybrid link: String, binary file: String, profile: UIViewController, completion:@escaping ErrorClosure) {
+        /// weak refrerence
+        callback = completion
+        
+        let qqInstalled = isInstalled(.qq)
+        let wxInstalled = isInstalled(.wxSession)
+        if qqInstalled && wxInstalled {
+            let p = SBParameter()
+            let plater = TPShareProfile(p)
+            let rooter = BaseNavigationProfile(rootViewController: plater)
+            rooter.view.backgroundColor = ClearBgColor
+            rooter.modalPresentationStyle = .overCurrentContext
+            rooter.setNavigationBarHidden(true, animated: true)
+            let animation = CATransition()
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animation.type = CATransitionType(rawValue: "Reveal")
+            animation.subtype = .fromTop
+            animation.duration = Macros.APP_ANIMATE_INTERVAL
+            UIApplication.shared.keyWindow?.layer.add(animation, forKey: nil)
+            profile.present(rooter, animated: true, completion: nil)
+            plater.platClosure = {[weak self](platform) in
+                self?.preShareMusic(platform, title: title, desciption: desc, icon: uri, hybrid: link, binary: file, profile: profile)
+            }
+            plater.cancelClosure = {[weak self] in
+                self?.callback?(nil)
+            }
+            return
+        }
+        /// 音乐就当作链接分享
+        shareLinkSystem(title: title, desciption: desc, icon: uri, hybrid: link, profile: profile)
+    }
+    /// 分享音乐（sdk）
+    private func preShareMusic(_ platform: TPlatform, title: String, desciption desc: String, icon uri: String, hybrid link: String, binary file: String, profile: UIViewController) {
+        BallLoading.show()
+        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+            BallLoading.hide()
+            guard let icon = image else {
+                let e = BaseError("分享图片数据错误！")
+                self?.callback?(e)
+                return
+            }
+            /// compress
+            let compressed = icon.sb_compress(32768)
+            self?.realShareMusic(platform, title: title, desciption: desc, icon: compressed, hybrid: link, binary: file)
+        }
+    }
+    private func realShareMusic(_ platform: TPlatform, title: String, desciption desc: String, icon source: UIImage, hybrid link: String, binary file: String) {
+        if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
+            let msg = WXMediaMessage()
+            msg.title = title
+            msg.description = desc
+            msg.setThumbImage(source)
+            let mscObj = WXMusicObject()
+            mscObj.musicUrl = link
+            mscObj.musicLowBandUrl = link
+            mscObj.musicDataUrl = file
+            mscObj.musicLowBandDataUrl = file
+            msg.mediaObject = mscObj
+            let req = SendMessageToWXReq()
+            req.bText = false
+            req.scene = (platform == .wxSession ? 0 : (platform == .wxTimeline ? 1 : 2))//WXSceneSession
+            req.message = msg
+            WXApi.send(req)
+        } else if platform == .qq {
+            let data = source.jpegData(compressionQuality: 1)
+            let obj = QQApiNewsObject.object(with: URL(string: link)!, title: title, description: desc, previewImageData: data)
+            let req = SendMessageToQQReq(content: obj as? QQApiObject)
+            let code = QQApiInterface.send(req)
+            debugPrint("code:\(code.rawValue)")
+        }
+    }
 }
