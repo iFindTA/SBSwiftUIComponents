@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.0)
+  - CHIPageControl/Jaloro (0.1.7)
   - DTCoreText (1.6.21):
     - DTCoreText/Core (= 1.6.21)
     - DTFoundation/Core (~> 1.7.5)
@@ -17,74 +18,105 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.13):
     - DTFoundation/Core
-  - ESPullToRefresh (2.7)
+  - EmptyDataSet-Swift (4.2.0)
+  - FSPagerView (0.8.2)
   - GDPerformanceView-Swift (2.0.2)
   - IQKeyboardManagerSwift (6.2.0)
   - PPBadgeViewSwift (2.2.2)
-  - SBComponents/Base (0.6.0):
-    - ESPullToRefresh
-    - GDPerformanceView-Swift
-    - IQKeyboardManagerSwift
+  - RealReachability (1.3.0):
+    - RealReachability/Connection (= 1.3.0)
+    - RealReachability/Ping (= 1.3.0)
+  - RealReachability/Connection (1.3.0)
+  - RealReachability/Ping (1.3.0)
+  - SBComponents/Base (0.6.1):
     - PPBadgeViewSwift
     - SBComponents/HTTPRouter
-  - SBComponents/Error (0.6.0)
-  - SBComponents/Extension (0.6.0):
+  - SBComponents/Error (0.6.1)
+  - SBComponents/Extension (0.6.1):
     - SnapKit
-  - SBComponents/HTTPRouter (0.6.0):
+  - SBComponents/HTTPRouter (0.6.1):
     - Alamofire
     - SBComponents/Error
     - SBComponents/Hud
     - SBComponents/Macros
     - SwiftyJSON
-  - SBComponents/Hud (0.6.0):
+  - SBComponents/HTTPState (0.6.1):
+    - RealReachability
     - SBComponents/Macros
-  - SBComponents/Kit (0.6.0):
+  - SBComponents/Hud (0.6.1):
+    - SBComponents/Macros
+  - SBComponents/Kit (0.6.1):
     - SBComponents/Base
     - SBComponents/Error
-    - Toaster
-  - SBComponents/Macros (0.6.0):
+    - SBToaster
+  - SBComponents/Macros (0.6.1):
     - SBComponents/Error
     - SBComponents/Extension
+  - SBComponents/SceneRouter (0.6.1):
+    - SBComponents/Base
+    - SBComponents/Error
+    - SBComponents/Macros
+  - SBPullToRefresh (2.9)
+  - SBToaster (2.1.2)
   - SDWebImage/Core (4.4.2)
+  - SJNavigationPopGesture (1.4.8)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
-  - Toaster (2.1.1)
 
 DEPENDENCIES:
+  - CHIPageControl/Jaloro (~> 0.1.7)
   - DTCoreText (~> 1.6.21)
-  - SBComponents/Base (~> 0.6.0)
-  - SBComponents/Kit (~> 0.6.0)
+  - EmptyDataSet-Swift (~> 4.2.0)
+  - FSPagerView (~> 0.8.1)
+  - GDPerformanceView-Swift (~> 2.0.2)
+  - IQKeyboardManagerSwift (~> 6.2.0)
+  - SBComponents/Base (~> 0.6.1)
+  - SBComponents/HTTPState (~> 0.6.1)
+  - SBComponents/Kit (~> 0.6.1)
+  - SBComponents/SceneRouter (~> 0.6.1)
+  - SBPullToRefresh (~> 2.9)
   - SDWebImage/Core
+  - SJNavigationPopGesture (~> 1.4.7)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - CHIPageControl
     - DTCoreText
     - DTFoundation
-    - ESPullToRefresh
+    - EmptyDataSet-Swift
+    - FSPagerView
     - GDPerformanceView-Swift
     - IQKeyboardManagerSwift
     - PPBadgeViewSwift
+    - RealReachability
     - SBComponents
+    - SBPullToRefresh
+    - SBToaster
     - SDWebImage
+    - SJNavigationPopGesture
     - SnapKit
     - SwiftyJSON
-    - Toaster
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
   DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
   DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
-  ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
+  EmptyDataSet-Swift: 1fa0b35f530a35f852ecb2b53564728b0c300aaf
+  FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   GDPerformanceView-Swift: a40b2f675589449f5b5082f3178f01bfdb7882ce
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   PPBadgeViewSwift: 96a41852df7437e9d948565a1bc894f757c29933
-  SBComponents: b0250b8594ca2ee4c9c588b9bacc895bf2aa75c9
+  RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
+  SBComponents: e022ad469df1978a64ac30967c528d98d34bcc47
+  SBPullToRefresh: e3c42add2d79c39c34844423e9ee75c8e980eef2
+  SBToaster: ffea00ad8c38eb80e6800c0fee5bc9b4c184252b
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SJNavigationPopGesture: 9b2c03b9c5b164e7880cf34386044ca3f1902567
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
 
-PODFILE CHECKSUM: 00c8bbf1d81dda5c58c7e5f8cc2a88b086415529
+PODFILE CHECKSUM: d373f8a40ea0b1d87e00d33fe69d681bc08af560
 
 COCOAPODS: 1.6.0.beta.2

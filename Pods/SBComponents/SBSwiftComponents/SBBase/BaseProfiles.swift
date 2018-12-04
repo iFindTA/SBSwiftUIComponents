@@ -62,8 +62,8 @@ open class BaseProfile: UIViewController {
         n.tintColor = tintColor
         n.isTranslucent = false
         n.titleTextAttributes = {[
-            NSAttributedStringKey.font: font,
-            NSAttributedStringKey.foregroundColor:tintColor
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor:tintColor
             ]}()
         return n
     }()
@@ -145,7 +145,7 @@ open class BaseNavigationProfile: UINavigationController {
         }
         return top.preferredStatusBarStyle
     }
-    override open var childViewControllerForStatusBarStyle: UIViewController? {
+    override open var childForStatusBarStyle: UIViewController? {
         return self.topViewController
     }
     
@@ -199,7 +199,7 @@ open class BaseTabBarProfile: UITabBarController {
         }
         self.sb_isTabBarAnimating = true
         
-        UIView.animate(withDuration: animate ? TimeInterval(UINavigationControllerHideShowBarDuration) : 0, delay: 0, options: .allowUserInteraction, animations: {
+        UIView.animate(withDuration: animate ? TimeInterval(UINavigationController.hideShowBarDuration) : 0, delay: 0, options: .allowUserInteraction, animations: {
             var tabBarTop: CGFloat = 0
             let viewFrame = self.view.convert(self.view.bounds, to: self.tabBar.superview)
             if hide {

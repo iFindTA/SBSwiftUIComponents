@@ -40,7 +40,7 @@ public extension UIView {
         if let s = objc_getAssociatedObject(self, &sb_associatedKeys.indicator) as? UIActivityIndicatorView {
             acter = s
         } else {
-            let a = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let a = UIActivityIndicatorView(style: .gray)
             a.hidesWhenStopped = true
             acter = a
             objc_setAssociatedObject(self, &sb_associatedKeys.indicator, a, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -59,7 +59,7 @@ public extension UIView {
                 }
                 self.layoutIfNeeded()
             }
-            self.bringSubview(toFront: loader)
+            self.bringSubviewToFront(loader)
             loader.startAnimating()
         }
     }

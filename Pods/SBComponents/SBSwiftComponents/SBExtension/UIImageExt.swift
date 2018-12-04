@@ -150,7 +150,7 @@ public extension UIImage {
     public func sb_compress(_ bytes: Int) -> UIImage {
         // Compress by quality
         var compression: CGFloat = 1
-        guard let tmp = UIImageJPEGRepresentation(self, compression), tmp.count > bytes else {
+        guard let tmp = self.jpegData(compressionQuality: compression), tmp.count > bytes else {
             return self
         }
         
@@ -159,7 +159,7 @@ public extension UIImage {
         var data: Data?
         for _ in 0..<6 {
             compression = (max + min) / 2
-            data = UIImageJPEGRepresentation(self, compression)
+            data = self.jpegData(compressionQuality: compression)
             if let d = data, Double(d.count) < Double(bytes) * 0.9 {
                 min = compression
             } else if let d = data, Double(d.count) > Double(bytes) {
@@ -188,7 +188,9 @@ public extension UIImage {
             resultImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             resultImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            tmpData = UIImageJPEGRepresentation(resultImage, compression)!
+            if let retData = resultImage.jpegData(compressionQuality: compression) {
+                tmpData = retData
+            }
         }
         
         return resultImage
@@ -206,9 +208,9 @@ public extension UIImage {
             debugPrint("font name not found!")
             return UIImage()
         }
-        var attributes = [NSAttributedStringKey: Any]()
-        attributes[NSAttributedStringKey.font] = font
-        attributes[NSAttributedStringKey.foregroundColor] = fontColor
+        var attributes = [NSAttributedString.Key: Any]()
+        attributes[NSAttributedString.Key.font] = font
+        attributes[NSAttributedString.Key.foregroundColor] = fontColor
         let bitmapSize = CGFloat(size) * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: bitmapSize, height: bitmapSize), false, scale)
         let ctx = UIGraphicsGetCurrentContext()

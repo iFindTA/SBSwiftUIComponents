@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SBComponents
+import IQKeyboardManagerSwift
+import GDPerformanceView_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //SJNavigationPopGesture.install()
+        IQKeyboardManager.shared.enable = true
+        debugPrint(NSHomeDirectory())
+        
+        let bounds = UIScreen.main.bounds
+        window = UIWindow(frame: bounds)
+        window?.backgroundColor = UIColor.white
+        let rooter = ViewController(nibName: nil, bundle: nil)
+        let navigator = UINavigationController(navigationBarClass: BaseNavigationBar.self, toolbarClass: nil)
+        navigator.viewControllers = [rooter]
+        //let navigator = BaseNavigationProfile(rootViewController: rooter)
+        navigator.setNavigationBarHidden(true, animated: true)
+        window?.rootViewController = navigator
+        window?.makeKeyAndVisible()
+        
+        #if DEBUG
+        PerformanceMonitor.shared().start()
+        #endif
+        startServices()
+        
         return true
     }
 
@@ -41,6 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    /// start services
+    private func startServices() {
+        _ = SBHTTPState.shared.isReachable()
+        SBHTTPRouter.shared.challengeNetworkPermission()
+        
+    }
 }
 

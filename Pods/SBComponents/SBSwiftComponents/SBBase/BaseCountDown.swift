@@ -26,7 +26,7 @@ public class CountDownButton: UIButton {
     public var finished: CountDownFinished?
     
     /// Overrides
-    public init(type buttonType: UIButtonType) {
+    public init(type buttonType: UIButton.ButtonType) {
         super.init(frame: .zero)
         self.addTarget(self, action: #selector(didTouched), for: .touchUpInside)
     }
@@ -56,7 +56,7 @@ public class CountDownButton: UIButton {
         seconds = total
         totalSeconds = total
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fired), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: .commonModes)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     @objc private func fired() {
         seconds -= 1

@@ -6,9 +6,9 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import Foundation
 import SDWebImage
 import FSPagerView
+import SBComponents
 import CHIPageControl
 
 fileprivate let BannerCellIdentifier = "banner-base-cell"

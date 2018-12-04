@@ -21,7 +21,7 @@ public class BaseButton: UIButton {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    public init(type buttonType: UIButtonType) {
+    public init(type buttonType: UIButton.ButtonType) {
         super.init(frame: .zero)
     }
     override public func layoutSubviews() {
@@ -112,7 +112,7 @@ public class BaseTableView: UITableView {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public override init(frame: CGRect, style: UITableViewStyle) {
+    public override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
@@ -158,7 +158,7 @@ open class BaseCell: UITableViewCell {
         let s = BaseImageView(frame: .zero)
         return s
     }()
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(scene)
     }
@@ -370,7 +370,7 @@ public class BaseBarCustomScene: UIView {
 public class BaseLoading: BaseScene {
     /// lazy vars
     private lazy var acter: UIActivityIndicatorView = {
-        let a = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let a = UIActivityIndicatorView(style: .gray)
         a.hidesWhenStopped = true
         return a
     }()

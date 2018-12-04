@@ -1,0 +1,6 @@
+framework module SBToaster {
+  umbrella header "SBToaster-umbrella.h"
+
+  export *
+  module * { export * }
+}

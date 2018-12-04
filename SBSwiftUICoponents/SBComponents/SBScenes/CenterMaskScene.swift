@@ -6,7 +6,7 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import Foundation
+import SBComponents
 
 /// mask 缩放居中弹窗
 open class BaseCenterMaskScene: BaseScene {

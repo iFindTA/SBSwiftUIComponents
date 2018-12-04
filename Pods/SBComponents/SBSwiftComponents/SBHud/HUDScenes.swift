@@ -30,7 +30,7 @@ public class BallLoading: UIView {
     /// lazy vars
     private lazy var ballContainer: UIVisualEffectView = {
         let bf = CGRect(x: 0, y: 0, width: 100, height: 100)
-        let style = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let style = UIBlurEffect(style: UIBlurEffect.Style.light)
         let s = UIVisualEffectView(effect: style)
         s.frame = bf
         s.center = CGPoint(x: ballSceneSize*0.5, y: ballSceneSize*0.5)
@@ -109,7 +109,7 @@ public class BallLoading: UIView {
         animation1.path = path1.cgPath
         animation1.isRemovedOnCompletion = true
         animation1.duration = CFTimeInterval(animationDuration)
-        animation1.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation1.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         ballLeft.layer.add(animation1, forKey: "animation1")
         
         //-------第三个球的动画
@@ -128,7 +128,7 @@ public class BallLoading: UIView {
         animation3.path = path3.cgPath
         animation3.isRemovedOnCompletion = true
         animation3.duration = CFTimeInterval(animationDuration)
-        animation3.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation3.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation3.delegate = self
         ballRight.layer.add(animation3, forKey: "animation3")
     }

@@ -7,7 +7,7 @@
 //
 
 import SDWebImage
-import Foundation
+import SBComponents
 import IQKeyboardManagerSwift
 
 fileprivate let kInputFont = UIFont.systemFont(ofSize: 13)

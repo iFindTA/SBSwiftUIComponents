@@ -6,7 +6,7 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import Foundation
+import SBComponents
 
 /// mask present弹出遮罩 base
 open class BaseMaskScene: BaseScene {

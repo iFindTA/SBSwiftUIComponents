@@ -1,0 +1,6 @@
+framework module SJNavigationPopGesture {
+  umbrella header "SJNavigationPopGesture-umbrella.h"
+
+  export *
+  module * { export * }
+}

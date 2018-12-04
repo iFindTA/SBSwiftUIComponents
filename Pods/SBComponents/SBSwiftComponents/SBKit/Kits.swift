@@ -6,7 +6,7 @@
 //  Copyright © 2018年 nanhu. All rights reserved.
 //
 
-import Toaster
+import SBToaster
 import Foundation
 
 fileprivate struct DateFmt {
@@ -152,12 +152,6 @@ public struct Kits {
         guard #available(iOS 11, *) else {
             return UIBarButtonItem(customView: btn)
         }
-        //btn.backgroundColor = UIColor.sb_random()
-        //let barScene = BaseBarCustomScene(frame: bounds, with: right ? .right : .left)
-        //barScene.backgroundColor = UIColor.sb_random()
-        //barScene.addSubview(btn)
-        //btn.center = barScene.center
-        //barScene.position = right ? .right : .left
         let bar = UIBarButtonItem(customView: btn)
         bar.tintColor = fontColor
         return bar
