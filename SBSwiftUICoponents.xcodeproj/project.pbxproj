@@ -46,6 +46,17 @@
 		609C43DB21B66800001414AD /* TestCommentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43D621B66800001414AD /* TestCommentProfile.swift */; };
 		609C43DC21B66800001414AD /* TestEmptyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43D721B66800001414AD /* TestEmptyProfile.swift */; };
 		609C43DD21B66800001414AD /* TestSnapkitProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43D821B66800001414AD /* TestSnapkitProfile.swift */; };
+		609C43F121B66A44001414AD /* TPShareProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43DF21B66A44001414AD /* TPShareProfile.swift */; };
+		609C43F221B66A44001414AD /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 609C43E221B66A44001414AD /* AlipaySDK.bundle */; };
+		609C43F321B66A44001414AD /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43E321B66A44001414AD /* AlipaySDK.framework */; };
+		609C43F421B66A44001414AD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43E821B66A44001414AD /* libWeChatSDK.a */; };
+		609C43F521B66A44001414AD /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 609C43EA21B66A44001414AD /* TencentOpenApi_IOS_Bundle.bundle */; };
+		609C43F621B66A44001414AD /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43EB21B66A44001414AD /* TencentOpenAPI.framework */; };
+		609C43F721B66A44001414AD /* TPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43EC21B66A44001414AD /* TPlatform.swift */; };
+		609C43F821B66A44001414AD /* TShare.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609C43EE21B66A44001414AD /* TShare.xcassets */; };
+		609C43F921B66A44001414AD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C43F021B66A44001414AD /* Share.swift */; };
+		609C43FC21B66B02001414AD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43FB21B66B02001414AD /* SystemConfiguration.framework */; };
+		609C43FE21B66B84001414AD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43FD21B66B83001414AD /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +123,21 @@
 		609C43D621B66800001414AD /* TestCommentProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCommentProfile.swift; sourceTree = "<group>"; };
 		609C43D721B66800001414AD /* TestEmptyProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEmptyProfile.swift; sourceTree = "<group>"; };
 		609C43D821B66800001414AD /* TestSnapkitProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSnapkitProfile.swift; sourceTree = "<group>"; };
+		609C43DF21B66A44001414AD /* TPShareProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPShareProfile.swift; sourceTree = "<group>"; };
+		609C43E221B66A44001414AD /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		609C43E321B66A44001414AD /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		609C43E521B66A44001414AD /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		609C43E621B66A44001414AD /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		609C43E721B66A44001414AD /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		609C43E821B66A44001414AD /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		609C43EA21B66A44001414AD /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		609C43EB21B66A44001414AD /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		609C43EC21B66A44001414AD /* TPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPlatform.swift; sourceTree = "<group>"; };
+		609C43EE21B66A44001414AD /* TShare.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TShare.xcassets; sourceTree = "<group>"; };
+		609C43F021B66A44001414AD /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		609C43FA21B66A74001414AD /* SBUIComponents-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SBUIComponents-bridge-header.h"; sourceTree = "<group>"; };
+		609C43FB21B66B02001414AD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		609C43FD21B66B83001414AD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7E4B9DFC5F4C27A699B3ED01 /* Pods-SBSwiftUICoponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.release.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.release.xcconfig"; sourceTree = "<group>"; };
 		B690E7899283AA027B26AE95 /* Pods-SBSwiftUICoponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.debug.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FE4CDB36AEC05F780CCDBC /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,12 +148,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C43FC21B66B02001414AD /* SystemConfiguration.framework in Frameworks */,
 				609C43A421B61617001414AD /* UIKit.framework in Frameworks */,
+				609C43F621B66A44001414AD /* TencentOpenAPI.framework in Frameworks */,
+				609C43F321B66A44001414AD /* AlipaySDK.framework in Frameworks */,
 				609C43A221B6125F001414AD /* Pods_SBSwiftUICoponents.framework in Frameworks */,
 				609C43A021B6121E001414AD /* CFNetwork.framework in Frameworks */,
 				609C439E21B61219001414AD /* CoreMotion.framework in Frameworks */,
 				609C439C21B61213001414AD /* CoreTelephony.framework in Frameworks */,
 				609C439A21B6120C001414AD /* CoreText.framework in Frameworks */,
+				609C43FE21B66B84001414AD /* libsqlite3.tbd in Frameworks */,
+				609C43F421B66A44001414AD /* libWeChatSDK.a in Frameworks */,
 				609C439821B61205001414AD /* libc++.tbd in Frameworks */,
 				609C439621B611FF001414AD /* libresolv.tbd in Frameworks */,
 				609C439421B611FA001414AD /* libz.tbd in Frameworks */,
@@ -181,6 +212,7 @@
 				609C438D21B6116C001414AD /* SBComponents */,
 				609C435F21B60F0F001414AD /* AppDelegate.swift */,
 				609C436121B60F0F001414AD /* ViewController.swift */,
+				609C43FA21B66A74001414AD /* SBUIComponents-bridge-header.h */,
 				609C436321B60F0F001414AD /* Main.storyboard */,
 				609C436621B60F12001414AD /* Assets.xcassets */,
 				609C436821B60F12001414AD /* LaunchScreen.storyboard */,
@@ -210,6 +242,8 @@
 		609C438D21B6116C001414AD /* SBComponents */ = {
 			isa = PBXGroup;
 			children = (
+				609C43EF21B66A44001414AD /* SBShare */,
+				609C43DE21B66A44001414AD /* SBTPlatform */,
 				609C43B621B65923001414AD /* SBAudioIndicator */,
 				609C43BE21B65923001414AD /* SBBrowser */,
 				609C43B221B65923001414AD /* SBEmpty */,
@@ -347,9 +381,77 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		609C43DE21B66A44001414AD /* SBTPlatform */ = {
+			isa = PBXGroup;
+			children = (
+				609C43ED21B66A44001414AD /* Assets */,
+				609C43E021B66A44001414AD /* Vendors */,
+				609C43DF21B66A44001414AD /* TPShareProfile.swift */,
+				609C43EC21B66A44001414AD /* TPlatform.swift */,
+			);
+			path = SBTPlatform;
+			sourceTree = "<group>";
+		};
+		609C43E021B66A44001414AD /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				609C43E121B66A44001414AD /* AliPay */,
+				609C43E421B66A44001414AD /* WeChat */,
+				609C43E921B66A44001414AD /* QQ */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		609C43E121B66A44001414AD /* AliPay */ = {
+			isa = PBXGroup;
+			children = (
+				609C43E221B66A44001414AD /* AlipaySDK.bundle */,
+				609C43E321B66A44001414AD /* AlipaySDK.framework */,
+			);
+			path = AliPay;
+			sourceTree = "<group>";
+		};
+		609C43E421B66A44001414AD /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				609C43E521B66A44001414AD /* WXApi.h */,
+				609C43E621B66A44001414AD /* WXApiObject.h */,
+				609C43E721B66A44001414AD /* WechatAuthSDK.h */,
+				609C43E821B66A44001414AD /* libWeChatSDK.a */,
+			);
+			path = WeChat;
+			sourceTree = "<group>";
+		};
+		609C43E921B66A44001414AD /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				609C43EA21B66A44001414AD /* TencentOpenApi_IOS_Bundle.bundle */,
+				609C43EB21B66A44001414AD /* TencentOpenAPI.framework */,
+			);
+			path = QQ;
+			sourceTree = "<group>";
+		};
+		609C43ED21B66A44001414AD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				609C43EE21B66A44001414AD /* TShare.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		609C43EF21B66A44001414AD /* SBShare */ = {
+			isa = PBXGroup;
+			children = (
+				609C43F021B66A44001414AD /* Share.swift */,
+			);
+			path = SBShare;
+			sourceTree = "<group>";
+		};
 		60BF065CE6F6451D0EBBF0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				609C43FD21B66B83001414AD /* libsqlite3.tbd */,
+				609C43FB21B66B02001414AD /* SystemConfiguration.framework */,
 				609C43A321B61617001414AD /* UIKit.framework */,
 				609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */,
 				609C439F21B6121E001414AD /* CFNetwork.framework */,
@@ -480,14 +582,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C43F221B66A44001414AD /* AlipaySDK.bundle in Resources */,
 				609C436A21B60F12001414AD /* LaunchScreen.storyboard in Resources */,
 				609C436721B60F12001414AD /* Assets.xcassets in Resources */,
 				609C43D221B666F2001414AD /* iconfont.ttf in Resources */,
 				609C43CE21B65923001414AD /* SBWebBrowser.strings in Resources */,
 				609C436521B60F0F001414AD /* Main.storyboard in Resources */,
 				609C43AF21B64EEB001414AD /* SBScenes.xcassets in Resources */,
+				609C43F521B66A44001414AD /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				609C43CB21B65923001414AD /* Scan.xcassets in Resources */,
 				609C43C721B65923001414AD /* EmptyIcons.xcassets in Resources */,
+				609C43F821B66A44001414AD /* TShare.xcassets in Resources */,
 				609C43CF21B65923001414AD /* SBBrowser.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,11 +697,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C43F721B66A44001414AD /* TPlatform.swift in Sources */,
 				609C43B021B64EEB001414AD /* PresentMaskScene.swift in Sources */,
 				609C43DC21B66800001414AD /* TestEmptyProfile.swift in Sources */,
 				609C43C621B65923001414AD /* EmptyDataSource.swift in Sources */,
+				609C43F121B66A44001414AD /* TPShareProfile.swift in Sources */,
 				609C43AD21B64EEB001414AD /* CenterMaskScene.swift in Sources */,
 				609C43B121B64EEB001414AD /* BannerPanel.swift in Sources */,
+				609C43F921B66A44001414AD /* Share.swift in Sources */,
 				609C439221B61199001414AD /* StepperPanel.swift in Sources */,
 				609C43C921B65923001414AD /* Navigator.swift in Sources */,
 				609C43CD21B65923001414AD /* Activities.swift in Sources */,
@@ -797,14 +905,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8K6A7692X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/AliPay",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/QQ",
+				);
 				INFOPLIST_FILE = SBSwiftUICoponents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.landun.SBSwiftUICoponents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/SBSwiftUICoponents/SBUIComponents-bridge-header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -817,14 +935,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8K6A7692X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/AliPay",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/QQ",
+				);
 				INFOPLIST_FILE = SBSwiftUICoponents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SBSwiftUICoponents/SBComponents/SBTPlatform/Vendors/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.landun.SBSwiftUICoponents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/SBSwiftUICoponents/SBUIComponents-bridge-header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -174,9 +174,9 @@ class ViewController: UIViewController {
         let desc = "这是一段精彩的描述文档，请具体查看文档"
         let link = "https://github.com/ifindTA/"
         let icon = "http://e.hiphotos.baidu.com/image/pic/item/72f082025aafa40fafb5fbc1a664034f78f019be.jpg"
-//        TPOpen.shared.shareLink([.qq, .wxSession], title: title, desciption: desc, icon: icon, hybrid: link, profile: self) { (error) in
-//
-//        }
+        TPOpen.shared.shareLink([.qq, .wxSession], title: title, desciption: desc, icon: icon, hybrid: link, profile: self) { (error) in
+
+        }
     }
     
     @objc private func testSnapkit() {

@@ -9,5 +9,10 @@
 #ifndef SBUIComponents_bridge_header_h
 #define SBUIComponents_bridge_header_h
 
+//third-platform
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 
 #endif /* SBUIComponents_bridge_header_h */
