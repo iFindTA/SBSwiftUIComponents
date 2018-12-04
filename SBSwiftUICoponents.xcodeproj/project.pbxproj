@@ -24,6 +24,7 @@
 		609C439E21B61219001414AD /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439D21B61219001414AD /* CoreMotion.framework */; };
 		609C43A021B6121E001414AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C439F21B6121E001414AD /* CFNetwork.framework */; };
 		609C43A221B6125F001414AD /* Pods_SBSwiftUICoponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */; };
+		609C43A421B61617001414AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C43A321B61617001414AD /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		609C439D21B61219001414AD /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		609C439F21B6121E001414AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		609C43A321B61617001414AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7E4B9DFC5F4C27A699B3ED01 /* Pods-SBSwiftUICoponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.release.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.release.xcconfig"; sourceTree = "<group>"; };
 		B690E7899283AA027B26AE95 /* Pods-SBSwiftUICoponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBSwiftUICoponents.debug.xcconfig"; path = "Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FE4CDB36AEC05F780CCDBC /* Pods_SBSwiftUICoponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBSwiftUICoponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C43A421B61617001414AD /* UIKit.framework in Frameworks */,
 				609C43A221B6125F001414AD /* Pods_SBSwiftUICoponents.framework in Frameworks */,
 				609C43A021B6121E001414AD /* CFNetwork.framework in Frameworks */,
 				609C439E21B61219001414AD /* CoreMotion.framework in Frameworks */,
@@ -179,6 +182,7 @@
 		60BF065CE6F6451D0EBBF0C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				609C43A321B61617001414AD /* UIKit.framework */,
 				609C43A121B6125F001414AD /* Pods_SBSwiftUICoponents.framework */,
 				609C439F21B6121E001414AD /* CFNetwork.framework */,
 				609C439D21B61219001414AD /* CoreMotion.framework */,

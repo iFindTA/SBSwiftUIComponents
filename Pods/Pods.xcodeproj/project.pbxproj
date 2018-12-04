@@ -3199,10 +3199,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		06A4F5B7046A89782B08C9A166EC73F4 /* Debug */ = {
+		093BE93619F8CFD116629910021E3817 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CA56BB1073F7DF8849703B294A755FC /* DTFoundation.xcconfig */;
+			baseConfigurationReference = EA96FF4BD9AC0741397BED638DD98E0E /* SBComponents.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3212,23 +3213,24 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DTFoundation/DTFoundation-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DTFoundation/DTFoundation-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SBComponents/SBComponents-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SBComponents/SBComponents-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DTFoundation/DTFoundation.modulemap";
-				PRODUCT_MODULE_NAME = DTFoundation;
-				PRODUCT_NAME = DTFoundation;
+				MODULEMAP_FILE = "Target Support Files/SBComponents/SBComponents.modulemap";
+				PRODUCT_MODULE_NAME = SBComponents;
+				PRODUCT_NAME = SBComponents;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		11D027BD8219E71225D197BACF78F7C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3295,6 +3297,37 @@
 			};
 			name = Debug;
 		};
+		123667FFA41B54E1D09F33B02F497B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C45AEC278D1CEAB957D43913A211D139 /* DTCoreText.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DTCoreText/DTCoreText-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DTCoreText/DTCoreText-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DTCoreText/DTCoreText.modulemap";
+				PRODUCT_MODULE_NAME = DTCoreText;
+				PRODUCT_NAME = DTCoreText;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		132EE7FB5F8182FB5C28C3AB0608E889 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 481868B733CABBF38F58EDA7FE7F48BD /* SDWebImage.xcconfig */;
@@ -3351,38 +3384,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1C3A1F7F69D2ACC3AC9A5AD1C78D2A1B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CA56BB1073F7DF8849703B294A755FC /* DTFoundation.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DTFoundation/DTFoundation-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DTFoundation/DTFoundation-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DTFoundation/DTFoundation.modulemap";
-				PRODUCT_MODULE_NAME = DTFoundation;
-				PRODUCT_NAME = DTFoundation;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3452,69 +3453,6 @@
 			};
 			name = Debug;
 		};
-		2B6C0EC89419A49BB17BD0B0819AF6AC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA96FF4BD9AC0741397BED638DD98E0E /* SBComponents.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SBComponents/SBComponents-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SBComponents/SBComponents-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SBComponents/SBComponents.modulemap";
-				PRODUCT_MODULE_NAME = SBComponents;
-				PRODUCT_NAME = SBComponents;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		46C6F4009528AE531E080DB5C39E31B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C45AEC278D1CEAB957D43913A211D139 /* DTCoreText.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DTCoreText/DTCoreText-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DTCoreText/DTCoreText-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DTCoreText/DTCoreText.modulemap";
-				PRODUCT_MODULE_NAME = DTCoreText;
-				PRODUCT_NAME = DTCoreText;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		537441DFBA42F172216EA309A8BF7DE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A3C4B8F5DE83D05D269F213E1854E9E9 /* ESPullToRefresh.xcconfig */;
@@ -3556,39 +3494,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		620BE95FD146D55109F7B193D01A5055 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA96FF4BD9AC0741397BED638DD98E0E /* SBComponents.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SBComponents/SBComponents-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SBComponents/SBComponents-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SBComponents/SBComponents.modulemap";
-				PRODUCT_MODULE_NAME = SBComponents;
-				PRODUCT_NAME = SBComponents;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3754,6 +3659,69 @@
 			};
 			name = Debug;
 		};
+		7C32FF1B4CF6E5865114B709B1B259F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CA56BB1073F7DF8849703B294A755FC /* DTFoundation.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DTFoundation/DTFoundation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DTFoundation/DTFoundation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DTFoundation/DTFoundation.modulemap";
+				PRODUCT_MODULE_NAME = DTFoundation;
+				PRODUCT_NAME = DTFoundation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8A35A50DC391B7F450DEA176003B9417 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C45AEC278D1CEAB957D43913A211D139 /* DTCoreText.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DTCoreText/DTCoreText-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DTCoreText/DTCoreText-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DTCoreText/DTCoreText.modulemap";
+				PRODUCT_MODULE_NAME = DTCoreText;
+				PRODUCT_NAME = DTCoreText;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		8C62B825E95A4AFDD7AA7F6F2D1B9537 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A3C4B8F5DE83D05D269F213E1854E9E9 /* ESPullToRefresh.xcconfig */;
@@ -3894,38 +3862,6 @@
 			};
 			name = Debug;
 		};
-		A7A74575BBE5FFEBF968539B85DAD348 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C45AEC278D1CEAB957D43913A211D139 /* DTCoreText.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DTCoreText/DTCoreText-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DTCoreText/DTCoreText-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DTCoreText/DTCoreText.modulemap";
-				PRODUCT_MODULE_NAME = DTCoreText;
-				PRODUCT_NAME = DTCoreText;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		AED60E8DA4E0B84B6F61F9A2E2B90314 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE3AFAA803CE202875F7FD896F263DA9 /* PPBadgeViewSwift.xcconfig */;
@@ -4020,6 +3956,70 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		CD57ABDAB57E1DDA1CC5395EFFB8DB57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA96FF4BD9AC0741397BED638DD98E0E /* SBComponents.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SBComponents/SBComponents-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SBComponents/SBComponents-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SBComponents/SBComponents.modulemap";
+				PRODUCT_MODULE_NAME = SBComponents;
+				PRODUCT_NAME = SBComponents;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D0976B63716A9EF1D45FEFD2FC8910B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CA56BB1073F7DF8849703B294A755FC /* DTFoundation.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DTFoundation/DTFoundation-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DTFoundation/DTFoundation-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DTFoundation/DTFoundation.modulemap";
+				PRODUCT_MODULE_NAME = DTFoundation;
+				PRODUCT_NAME = DTFoundation;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		D8FB68BB6EE35D8F9A81121EA16696DE /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -4244,8 +4244,8 @@
 		7223FB7F4EA8C4E060DB062A9C0AE245 /* Build configuration list for PBXNativeTarget "DTFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				06A4F5B7046A89782B08C9A166EC73F4 /* Debug */,
-				1C3A1F7F69D2ACC3AC9A5AD1C78D2A1B /* Release */,
+				7C32FF1B4CF6E5865114B709B1B259F5 /* Debug */,
+				D0976B63716A9EF1D45FEFD2FC8910B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4262,8 +4262,8 @@
 		CC692D240C25C276AFF62E04FA762971 /* Build configuration list for PBXNativeTarget "SBComponents" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2B6C0EC89419A49BB17BD0B0819AF6AC /* Debug */,
-				620BE95FD146D55109F7B193D01A5055 /* Release */,
+				CD57ABDAB57E1DDA1CC5395EFFB8DB57 /* Debug */,
+				093BE93619F8CFD116629910021E3817 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4298,8 +4298,8 @@
 		EE845E6D1AA207BCA6969EFD876D3D31 /* Build configuration list for PBXNativeTarget "DTCoreText" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46C6F4009528AE531E080DB5C39E31B5 /* Debug */,
-				A7A74575BBE5FFEBF968539B85DAD348 /* Release */,
+				123667FFA41B54E1D09F33B02F497B68 /* Debug */,
+				8A35A50DC391B7F450DEA176003B9417 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,9 +1,8 @@
 platform :ios, '10.0'
 
+# hook for install
 post_install do |installer|
-  # 需要指定编译版本的第三方的名称
-  exTargets = ['SnapKit', 'Toaster', 'ESPullToRefresh']
-  
+  exTargets = ['SnapKit', 'Toaster', 'SBComponents', 'DTCoreText', 'DTFoundation', 'ESPullToRefresh']
   installer.pods_project.targets.each do |target|
     if exTargets.include? target.name
       target.build_configurations.each do |config|
