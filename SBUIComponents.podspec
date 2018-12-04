@@ -47,6 +47,7 @@ Pod::Spec.new do |s|
     ss.resources = "SBSwiftUICoponents/SBScenes/Assets/*.*"
     ss.dependency 'SBComponents/Kit'
     ss.dependency 'SDWebImage/Core'
+    ss.dependency 'IQKeyboardManagerSwift'
   end
 
   # 暂时不用更新，可继续使用 SBComponents/Scan~>0.6.0
