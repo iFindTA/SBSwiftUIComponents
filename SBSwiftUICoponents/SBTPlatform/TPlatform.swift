@@ -264,14 +264,6 @@ class TAliHandler: NSObject {
                 if let stat = PayStatus(rawValue: code) {
                     status = stat
                 }
-                //                var orderNo: String?
-                //                if status == .success {
-                //                    let result = json["result"].stringValue
-                //                    let retJson = JSON.init(parseJSON: result)
-                //                    let appPay = retJson["alipay_trade_app_pay_response"]
-                //                    let res = appPay["trade_no"]
-                //                    orderNo = res.stringValue
-                //                }
                 
                 //callback
                 var e = BaseError(status.desc())
