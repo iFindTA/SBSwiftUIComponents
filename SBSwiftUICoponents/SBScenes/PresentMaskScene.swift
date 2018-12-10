@@ -79,8 +79,14 @@ open class BaseMaskScene: BaseScene {
     }
     @objc public func dismiss() {
         whetherDisplay.toggle()
+        if whetherDisplay == false {
+            willDisappear()
+        }
         updateScenePosition()
         didDisappear()
+    }
+    open func willDisappear() {
+        
     }
     open func didDisappear() {
         
