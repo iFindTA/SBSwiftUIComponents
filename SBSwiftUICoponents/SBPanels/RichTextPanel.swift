@@ -10,6 +10,7 @@ import DTCoreText
 import SDWebImage
 import SBComponents
 
+public let RichDefaultWidth: CGFloat = AppSize.WIDTH_SCREEN - 15*2
 fileprivate let html = "<span style=\"color:#333;font-size:15px;\"><strong>砍价师服务介绍</strong></span><br/><span align=\"right\" style=\"color:#333;font-size:15px;\">我们不是中介。</span><br/> <span style=\"color:#333;font-size:15px;\">我们是一群愿意站在买房人一边的，地产业内人士。</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>砍不下来，不要钱！</strong></span><br/><span style=\"color:#333;font-size:15px;\">类似你请个律师，完全站在你的立场，帮你谈判。我们发心，用立场和专业，改变中国买房人的被动、挨宰局面！</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>服务流程：</strong></span><br/><span style=\"color:#333;font-size:15px;\">1.砍前培训。砍价师教你和中介、业主交流，哪些话能说，哪些话不能说；</span><br/><span style=\"color:#333;font-size:15px;\">2.选砍价师。和砍价师约见，确认服务，并做各方信息梳理，确定谈判策略。</span><br/><span style=\"color:#333;font-size:15px;\">3.现场谈判。砍价师陪你去现场，协助把控谈判进程；在你砍不动时，再继续全力争取最好价格。</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>收费标准：</strong></span><br/><span style=\"color:#333;font-size:15px;\">记住！砍价是由你自己先砍，砍不动时再由砍价师继续砍；由砍价师多砍下的部分，才按照下列标准收费：</span><br/><span style=\"color:#333;font-size:15px;\"><img src=\"http://cn-qinqimaifang-uat.oss-cn-hangzhou.aliyuncs.com/img/specialist/upload/spcetiicwlz1v_54e2e00fa8a6faf66168571654dbfee2.jpg\" _src=\"http://cn-qinqimaifang-uat.oss-cn-hangzhou.aliyuncs.com/img/specialist/upload/spcetiicwlz1v_54e2e00fa8a6faf66168571654dbfee2.jpg\"></span><span style=\"color:#333;font-size:15px;\"><strong>砍不下来，不收费！</strong></span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>举个例子：</strong></span><br/><span style=\"color:#333;font-size:15px;\">李先生看好一套房子，经过自己努力将价格砍到300万，砍价师在李先生的基础上将价格谈到270万，成功砍下30万，其中0~5万元阶梯价格部分为5万元，5~10万元阶梯价格部分为5万元，10万元以上阶梯价格部分为20万元，则</span><br/><span style=\"color:#333;font-size:15px;\"><strong>应收服务费：5x30％+5x40%+20x50%=13.5万</strong></span><br/><br/><span style=\"color:#333;font-size:15px;\">百度:<a href=\"http://www.w3school.com.cn\">my testlink</a></span><br/><br/><span style=\"color:#333;font-size:15px;\">电话：<a href=\"tel:4008001234\">my phoneNum</a></span><br/><br/><span style=\"color:#333;font-size:15px;\">我邮箱:<a href=\"mailto:dreamcoffeezs@163.com\">my mail</a></span>"
 
 /// 富文本panel
@@ -18,9 +19,18 @@ public class RichTextPanel: BaseScene {
     public var callback: VoidClosure?
     private var htmlString: String = ""
     private var maxBoundary: CGRect = .zero
-    private var availableWidth: CGFloat = AppSize.WIDTH_SCREEN
-    public var availableHeight: CGFloat = AppSize.HEIGHT_SCREEN
+    private var availableWidth: CGFloat = AppSize.HEIGHT_SCREEN - HorizontalOffsetMid*2
+    private var topOffset: CGFloat = HorizontalOffset
+    private var bottomOffset: CGFloat = HorizontalOffset
     /// lazy vars
+    private lazy var upOffset: BaseScene = {
+        let s = BaseScene(frame: .zero)
+        return s
+    }()
+    private lazy var downOffset: BaseScene = {
+        let s = BaseScene(frame: .zero)
+        return s
+    }()
     private lazy var scene: BaseScene = {
         let s = BaseScene(frame: .zero)
         return s
@@ -31,14 +41,18 @@ public class RichTextPanel: BaseScene {
         return l
     }()
     
-    public class func panel(_ width: CGFloat=AppSize.WIDTH_SCREEN) -> RichTextPanel {
-        return RichTextPanel(width)
+    public class func panel(_ width: CGFloat=RichDefaultWidth, with top: CGFloat=10, and bottom: CGFloat=10) -> RichTextPanel {
+        return RichTextPanel(width, with: top, and: bottom)
     }
-    private init(_ width: CGFloat) {
+    private init(_ width: CGFloat, with top: CGFloat=10, and bottom: CGFloat=10) {
         super.init(frame: .zero)
+        topOffset = top
+        bottomOffset = bottom
         availableWidth = width
-        maxBoundary = CGRect(x: 0, y: 0, width: width, height: CGFloat(CGFLOAT_HEIGHT_UNKNOWN))
+        maxBoundary = CGRect(x: 0, y: 0, width: availableWidth, height: CGFloat(CGFLOAT_HEIGHT_UNKNOWN))
+        addSubview(upOffset)
         addSubview(scene)
+        addSubview(downOffset)
         scene.addSubview(label)
     }
     required init?(coder aDecoder: NSCoder) {
@@ -46,8 +60,18 @@ public class RichTextPanel: BaseScene {
     }
     override public func layoutSubviews() {
         super.layoutSubviews()
+        upOffset.snp.makeConstraints { (m) in
+            m.top.left.right.equalToSuperview()
+            m.height.equalTo(topOffset)
+        }
         scene.snp.makeConstraints { (m) in
-            m.edges.equalToSuperview()
+            m.top.equalTo(upOffset.snp.bottom)
+            m.centerX.equalToSuperview()
+            m.bottom.equalTo(downOffset.snp.top)
+        }
+        downOffset.snp.makeConstraints { (m) in
+            m.left.bottom.right.equalToSuperview()
+            m.height.equalTo(bottomOffset)
         }
         label.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
@@ -119,7 +143,6 @@ extension RichTextPanel: DTAttributedTextContentViewDelegate {
     }
     
     public func attributedTextContentView(_ attributedTextContentView: DTAttributedTextContentView!, didDraw layoutFrame: DTCoreTextLayoutFrame!, in context: CGContext!) {
-        availableHeight = layoutFrame?.frame.height ?? 0
         callback?()
         debugPrint("did end draw,,,,,,,,,,")
     }

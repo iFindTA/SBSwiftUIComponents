@@ -93,10 +93,10 @@ public class FixedNavigator: BaseScene {
                 if let ref = lastMargin {
                     make.left.equalTo(ref.snp.right).offset(HorizontalOffset)
                 } else {
-                    make.left.equalToSuperview().offset(HorizontalOffsetMAX)
+                    make.left.equalToSuperview()
                 }
                 if idx == counts-1 {
-                    make.right.equalToSuperview().offset(-HorizontalOffsetMAX)
+                    make.right.equalToSuperview()
                 }
             }
             lastMargin = item
@@ -108,7 +108,7 @@ public class FixedNavigator: BaseScene {
             return
         }
         let counts = titles.count; itemBtns.removeAll()
-        let reallyWidth = availableWidth - HorizontalOffset*2 - HorizontalOffset * CGFloat(counts-1)
+        let reallyWidth = availableWidth - HorizontalOffset * CGFloat(counts-1)
         itemWidth = floor(reallyWidth / CGFloat(counts))
         itemHeight = AppSize.HEIGHT_NAVIGATIONBAR
         let font = AppFont.pingFangMedium(AppFont.SIZE_TITLE+1)
