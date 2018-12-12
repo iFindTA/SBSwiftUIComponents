@@ -13,6 +13,7 @@ import SBComponents
 public enum TestPaths: SBScenePathable {
     case test
     case api
+    case html
     case empty
     case share
     case snapkit
@@ -22,6 +23,8 @@ public enum TestPaths: SBScenePathable {
         switch self {
         case .api:
             return "TestApiProfile"
+        case .html:
+            return "TestHtmlProfile"
         case .empty:
             return "TestEmptyProfile"
         case .share:
@@ -36,11 +39,12 @@ public enum TestPaths: SBScenePathable {
     }
 }
 
-fileprivate let baseURI = "http://192.168.1.199:8080"
+fileprivate let baseURI = "https://mp.landun.tech"
 /// HTTP paths
 public enum SBHTTP {
     case void
     case test
+    case html(Int)
     
     var method: HTTPMethod {
         switch self {
@@ -54,6 +58,8 @@ public enum SBHTTP {
         switch self {
         case .test:
             return "app"
+        case .html(let gid):
+            return "prod/item/\(gid).json"
         default:
             return ""
         }

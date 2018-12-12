@@ -145,6 +145,16 @@ class ViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(AppSize.HEIGHT_SUBBAR)
         }
+        let html = BaseButton(type: .custom)
+        html.setTitle("test html", for: .normal)
+        html.setTitleColor(UIColor.blue, for: .normal)
+        html.addTarget(self, action: #selector(testHtml), for: .touchUpInside)
+        view.addSubview(html)
+        html.snp.makeConstraints { (make) in
+            make.top.equalTo(state.snp.bottom).offset(20)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(AppSize.HEIGHT_SUBBAR)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -206,6 +216,9 @@ class ViewController: UIViewController {
     }
     @objc private func testComments() {
         _ = SBSceneRouter.route2(TestPaths.comment)
+    }
+    @objc private func testHtml() {
+        _ = SBSceneRouter.route2(TestPaths.html)
     }
     
     @objc private func testState(_ btn: BaseButton) {
