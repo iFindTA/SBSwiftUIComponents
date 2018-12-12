@@ -28,20 +28,17 @@ public class EmptyDataSource: NSObject, EmptyDataSetSource, EmptyDataSetDelegate
     public var didTrigger: emptyPlaceholderTrigger?
     
     // MARK: empty delegate & dataSource
-    public func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+    public func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
         guard shouldDisplay != nil else {
             return true
         }
         return shouldDisplay!()
     }
-    public func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        guard let icon = EmptyDataSource.bundledImage(named: EmptyImageName) else {
-            return UIImage()
-        }
-        return icon
+    public func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return EmptyDataSource.bundledImage(named: EmptyImageName)
     }
     
-    public func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    public func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let font = UIFont(name: AppFont.PF_BOLD, size: AppFont.SIZE_TITLE)
         let fontColor = EmptyColor
         var attributes = [NSAttributedString.Key: Any]()
@@ -50,7 +47,7 @@ public class EmptyDataSource: NSObject, EmptyDataSetSource, EmptyDataSetDelegate
         return NSAttributedString(string: Macros.EMPTY_TITLE, attributes: attributes)
     }
     
-    public func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    public func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let font = UIFont(name: AppFont.PF_BOLD, size: AppFont.SIZE_SUB_TITLE)
         let fontColor = EmptyColor
         var attributes = [NSAttributedString.Key: Any]()
@@ -66,15 +63,15 @@ public class EmptyDataSource: NSObject, EmptyDataSetSource, EmptyDataSetDelegate
         return NSAttributedString(string: display, attributes: attributes)
     }
     
-    public func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+    public func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
         return -20
     }
     
-    public func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+    public func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView) -> Bool {
         return true
     }
     
-    public func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+    public func emptyDataSet(_ scrollView: UIScrollView, didTap view: UIView) {
         guard didTrigger != nil else {
             return
         }

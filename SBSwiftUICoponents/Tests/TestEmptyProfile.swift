@@ -63,11 +63,11 @@ class TestEmptyProfile: BaseProfile {
             make.bottom.equalToSuperview().offset(-bottom)
         }
         /// method 1
-//        table.emptyDataSetSource = empty
-//        table.emptyDataSetDelegate = empty
-//        empty.shouldDisplay = {()->Bool in
-//            return true
-//        }
+        table.emptyDataSetSource = empty
+        table.emptyDataSetDelegate = empty
+        empty.shouldDisplay = {()->Bool in
+            return true
+        }
         
         /// method 2
 //        table.empty("去评论", with: "还没有人评论，快去抢沙发吧～")
@@ -76,9 +76,9 @@ class TestEmptyProfile: BaseProfile {
 //        }
         
         /// method3
-        table.delegate = self
-        table.dataSource = self
-        table.reloadData()
+//        table.delegate = self
+//        table.dataSource = self
+//        table.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
