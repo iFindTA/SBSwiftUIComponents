@@ -66,20 +66,20 @@ public class RichTextPanel: BaseScene {
         super.layoutSubviews()
         upOffset.snp.makeConstraints { (m) in
             m.top.left.right.equalToSuperview()
-            m.height.equalTo(topOffset)
+            m.height.equalTo(topOffset).priority(UILayoutPriority.defaultHigh)
         }
         scene.snp.makeConstraints { (m) in
             m.top.equalTo(upOffset.snp.bottom)
-            m.left.right.equalToSuperview()
+            m.left.equalToSuperview().offset(horizontalOffset)
+            m.right.equalToSuperview()
             m.bottom.equalTo(downOffset.snp.top)
         }
         downOffset.snp.makeConstraints { (m) in
             m.left.bottom.right.equalToSuperview()
-            m.height.equalTo(bottomOffset)
+            m.height.equalTo(bottomOffset).priority(UILayoutPriority.defaultHigh)
         }
-        let insets = UIEdgeInsets(top: 0, left: horizontalOffset, bottom: 0, right: horizontalOffset)
         label.snp.makeConstraints { (m) in
-            m.edges.equalToSuperview().inset(insets)
+            m.edges.equalToSuperview()
         }
     }
     /// getters
