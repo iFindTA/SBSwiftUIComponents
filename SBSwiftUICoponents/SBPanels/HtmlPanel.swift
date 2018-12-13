@@ -89,14 +89,14 @@ class HtmlPanel: BaseScene {
                     debugPrint("empty img!")
                     return
                 }
-                let ab = attachment.bounds
-                debugPrint("bounds:\(ab)")
-                var tmpImg = img
-                if let extra = attachment.fileType, extra.hasSuffix("gif") == true {
-                    let randomImg = UIImage.sb_imageWithColor(.sb_random(), size: CGSize(width: availableWidth, height: availableWidth))
-                    tmpImg = randomImg
-                }
+                /// method1
+//                var tmpImg = img
+//                if let extra = attachment.fileType, extra.hasSuffix("gif") == true {
+//                    let randomImg = UIImage.sb_imageWithColor(.sb_random(), size: CGSize(width: availableWidth, height: availableWidth))
+//                    tmpImg = randomImg
+//                }
                 
+                /// method2
 //                guard let extra = attachment.fileType, extra.hasSuffix("gif") == false else {
 //                    let uri = URL(string: "http://pic.landun.tech/6cb5cb3524639f13e954ba1edb10aefd.gif")
 //                    let data = NSData.init(contentsOf: uri!)
@@ -114,7 +114,7 @@ class HtmlPanel: BaseScene {
 //                    return
 //                }
                 let newAttribute = NSTextAttachment()
-                newAttribute.image = resizeImage(tmpImg)
+                newAttribute.image = resizeImage(img)
                 tmpAttr.addAttribute(NSAttributedString.Key.attachment, value: newAttribute, range: range)
             }
         })

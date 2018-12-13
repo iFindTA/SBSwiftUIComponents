@@ -25,8 +25,8 @@ class TestHtmlProfile: BaseProfile {
         return s
     }()
     #if DEBUG
-    lazy private var richPanel: RichTextPanel = {
-        let p = RichTextPanel.panel()
+    lazy private var richPanel: HtmlPanel = {
+        let p = HtmlPanel.panel()
         return p
     }()
     #else
