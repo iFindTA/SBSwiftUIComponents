@@ -178,8 +178,7 @@ extension RichTextPanel: DTLazyImageViewDelegate {
         label.attributedString = fetchAttributedString(htmlString)
         label.relayoutText()
     }
-    //字符串中一些图片没有宽高，懒加载图片之后，在此方法中得到图片宽高
-    //这个把宽高替换原来的html,然后重新设置富文本
+    /// 字符串中一些图片没有宽高，懒加载图片之后，在此方法中得到图片宽高,这个把宽高替换原来的html,然后重新设置富文本
     private func configureNoSizeImageView(_ uri: String, with size: CGSize) {
         let imgSizeScle = size.height / size.width
         var imgWidth = size.width
