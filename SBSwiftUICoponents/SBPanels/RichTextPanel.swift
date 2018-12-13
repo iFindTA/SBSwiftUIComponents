@@ -71,7 +71,7 @@ public class RichTextPanel: BaseScene {
         scene.snp.makeConstraints { (m) in
             m.top.equalTo(upOffset.snp.bottom)
             m.left.equalToSuperview().offset(horizontalOffset)
-            m.right.equalToSuperview()
+            m.right.equalToSuperview().offset(-horizontalOffset).priority(UILayoutPriority.defaultHigh)
             m.bottom.equalTo(downOffset.snp.top)
         }
         downOffset.snp.makeConstraints { (m) in
