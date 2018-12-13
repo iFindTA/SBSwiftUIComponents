@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DTCoreText
 import SBComponents
 import IQKeyboardManagerSwift
 import GDPerformanceView_Swift
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PerformanceMonitor.shared().start()
         #endif
         startServices()
+        DTAttributedTextContentView.setLayerClass(DTTiledLayerWithoutFade.self)
         
         return true
     }

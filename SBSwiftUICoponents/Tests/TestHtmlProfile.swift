@@ -24,10 +24,20 @@ class TestHtmlProfile: BaseProfile {
         let s = BaseScene(frame: .zero)
         return s
     }()
+    #if DEBUG
     lazy private var richPanel: RichTextPanel = {
         let p = RichTextPanel.panel()
         return p
     }()
+    #else
+    lazy private var htmlLabel: BaseLabel = {
+        let s = BaseLabel(frame: .zero)
+        s.backgroundColor = UIColor.sb_random()
+        s.numberOfLines = 0
+        s.lineBreakMode = .byCharWrapping
+        return s
+    }()
+    #endif
     
     private var params: SBParameter?
     init(_ parameters: SBParameter?) {
@@ -50,7 +60,11 @@ class TestHtmlProfile: BaseProfile {
         /// ui hierarchy
         view.addSubview(scroller)
         scroller.addSubview(layouter)
+        #if DEBUG
         layouter.addSubview(richPanel)
+        #else
+        layouter.addSubview(htmlLabel)
+        #endif
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -61,9 +75,15 @@ class TestHtmlProfile: BaseProfile {
         layouter.snp.makeConstraints { (m) in
             m.edges.width.equalToSuperview()
         }
+        #if DEBUG
         richPanel.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
         }
+        #else
+        htmlLabel.snp.makeConstraints { (m) in
+            m.edges.width.equalToSuperview()
+        }
+        #endif
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,7 +98,45 @@ class TestHtmlProfile: BaseProfile {
     }
     private func handle(_ json: JSON?) {
         let desc = json?["desc"].stringValue
-        richPanel.update(desc)
+        let htmlString = "<html><body> \(desc ?? "empty for displaying") </body></html>"
+        #if DEBUG
+        richPanel.update(htmlString)
+        #else
+        let htmlString = "<html><body> \(desc ?? "empty for displaying") <style> section {margin: 0 !important; width: 100% !important;} p {margin: 0 !important; width: 100% !important;}</style></body></html>"
+        let data = htmlString.data(using: String.Encoding.unicode)! // mind "!"
+        let attrStr = try? NSAttributedString( // do catch
+            data: data,
+            options: [.documentType: NSAttributedString.DocumentType.html],
+            documentAttributes: nil)
+        guard let attr = attrStr else {
+            debugPrint("empty attr string")
+            return
+        }
+        let tmpAttr = NSMutableAttributedString(attributedString: attr)
+        let availableWidth = AppSize.WIDTH_SCREEN - HorizontalOffsetMid*2
+        tmpAttr.enumerateAttribute(NSAttributedString.Key.attachment, in: NSMakeRange(0, attrStr?.length ?? 0), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { (value, range, stop) in
+            if let attachment = value as? NSTextAttachment {
+                let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)
+                guard let img = image else {
+                    return
+                }
+                let imgSize = img.size
+                let imgScale = imgSize.height / imgSize.width
+                var imgWidth = imgSize.width
+                var imgHeight = imgSize.height
+                if imgSize.width > availableWidth {
+                    imgWidth = availableWidth
+                    imgHeight = imgWidth * imgScale
+                    let newImg = img.sb_resize(CGSize(width: imgWidth, height: imgHeight))
+                    let newAttribute = NSTextAttachment()
+                    newAttribute.image = newImg
+                    tmpAttr.addAttribute(NSAttributedString.Key.attachment, value: newAttribute, range: range)
+                }
+            }
+        })
+        // suppose we have an UILabel, but any element with NSAttributedString will do
+        htmlLabel.attributedText = tmpAttr
+        #endif
     }
 }
 

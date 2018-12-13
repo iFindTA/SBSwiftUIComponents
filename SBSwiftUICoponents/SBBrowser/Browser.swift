@@ -38,7 +38,7 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         l.font = AppFont.pingFangSC(AppFont.SIZE_SUB_TITLE)
         l.textColor = AppColor.COLOR_TITLE_GRAY
         l.textAlignment = .center
-        l.text = "此网页由 x16.com 提供"
+        l.text = "此网页由 landun.tech 提供"
         return l
     }()
     
@@ -71,7 +71,25 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
     var request: URLRequest!
     var sharingEnabled = true
     
-    /// getters
+    private lazy var closeBtn: UIBarButtonItem = {
+        var item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
+                                                    target: self,
+                                                    action: #selector(closeBrowser))
+        item.tintColor = AppColor.COLOR_NAVIGATOR_TINT
+        item.isEnabled = false
+        return item
+    }()
+    private lazy var moreBtn: UIBarButtonItem =  {
+        var item = UIBarButtonItem(image: WebBrowser.bundledImage(named: "browser_icon_more"),
+                                                    style: UIBarButtonItem.Style.plain,
+                                                    target: self,
+                                                    action: #selector(moreBrowserEvent))
+        item.width = 18.0
+        item.tintColor = AppColor.COLOR_NAVIGATOR_TINT
+        return item
+    }()
+    
+    /* getters
     lazy var backBarButtonItem: UIBarButtonItem =  {
         var tempBackBarButtonItem = UIBarButtonItem(image: WebBrowser.bundledImage(named: "browser_icon_back"),
                                                     style: UIBarButtonItem.Style.plain,
@@ -81,7 +99,6 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         tempBackBarButtonItem.tintColor = self.buttonColor
         return tempBackBarButtonItem
     }()
-    
     lazy var forwardBarButtonItem: UIBarButtonItem =  {
         var tempForwardBarButtonItem = UIBarButtonItem(image: WebBrowser.bundledImage(named: "browser_icon_forward"),
                                                        style: UIBarButtonItem.Style.plain,
@@ -91,7 +108,6 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         tempForwardBarButtonItem.tintColor = self.buttonColor
         return tempForwardBarButtonItem
     }()
-    
     lazy var refreshBarButtonItem: UIBarButtonItem = {
         var tempRefreshBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.refresh,
                                                        target: self,
@@ -99,7 +115,6 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         tempRefreshBarButtonItem.tintColor = self.buttonColor
         return tempRefreshBarButtonItem
     }()
-    
     lazy var stopBarButtonItem: UIBarButtonItem = {
         var tempStopBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
                                                     target: self,
@@ -107,7 +122,6 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         tempStopBarButtonItem.tintColor = self.buttonColor
         return tempStopBarButtonItem
     }()
-    
     lazy var actionBarButtonItem: UIBarButtonItem = {
         var tempActionBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                                                       target: self,
@@ -115,45 +129,7 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         tempActionBarButtonItem.tintColor = self.buttonColor
         return tempActionBarButtonItem
     }()
-    @objc func goBackTapped(_ sender: UIBarButtonItem) {
-        webView.goBack()
-    }
-    
-    @objc func goForwardTapped(_ sender: UIBarButtonItem) {
-        webView.goForward()
-    }
-    
-    @objc func reloadTapped(_ sender: UIBarButtonItem) {
-        webView.reload()
-    }
-    
-    @objc func stopTapped(_ sender: UIBarButtonItem) {
-        webView.stopLoading()
-        updateToolbarItems()
-    }
-    
-    @objc func actionButtonTapped(_ sender: AnyObject) {
-        
-        if let url: URL = ((webView.url != nil) ? webView.url : request.url) {
-            let activities: NSArray = [SBActivitySafari(), SBActivityChrome()]
-            
-            if url.absoluteString.hasPrefix("file:///") {
-                let dc: UIDocumentInteractionController = UIDocumentInteractionController(url: url)
-                dc.presentOptionsMenu(from: view.bounds, in: view, animated: true)
-            }
-            else {
-                let activityController: UIActivityViewController = UIActivityViewController(activityItems: [url], applicationActivities: activities as? [UIActivity])
-                
-                if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-                    let ctrl: UIPopoverPresentationController = activityController.popoverPresentationController!
-                    ctrl.sourceView = view
-                    ctrl.barButtonItem = sender as? UIBarButtonItem
-                }
-                
-                present(activityController, animated: true, completion: nil)
-            }
-        }
-    }
+    */
     
     /// progress
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -168,12 +144,6 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
-    }
-    
-    @objc func doneButtonTapped() {
-        closing = true
-        UINavigationBar.appearance().barStyle = storedStatusColor!
-        self.dismiss(animated: true, completion: nil)
     }
     
     class func bundledImage(named: String) -> UIImage? {
@@ -193,25 +163,18 @@ extension WebBrowser {
         
         /// navigation bar
         view.addSubview(navigationBar)
-        let spacer = Kits.barSpacer()
-        let backer = Kits.defaultBackBarItem(self, action: #selector(defaultGobackStack))
-        navigatorItem.leftBarButtonItems = [spacer, backer]
+        let spaceL = Kits.barSpacer()
+        let spaceR = Kits.barSpacer(true)
+        let backer = Kits.defaultBackBarItem(self, action: #selector(backwardBrowser))
+        navigatorItem.leftBarButtonItems = [spaceL, backer, closeBtn]
+        navigatorItem.rightBarButtonItems = [spaceR, moreBtn]
         navigationBar.pushItem(navigatorItem, animated: true)
         
         /// webview
         view.addSubview(webView)
-        webView.snp.makeConstraints { (make) in
-            make.top.equalTo(navigationBar.snp.bottom)
-            make.left.bottom.right.equalToSuperview()
-        }
         
         /// progress
         view.addSubview(progress)
-        progress.snp.makeConstraints { (make) in
-            make.top.equalTo(navigationBar.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(2)
-        }
         
         /// request
         if let p = params, p.keys.contains("url") {
@@ -238,6 +201,20 @@ extension WebBrowser {
         }
         webView.load(request)
     }
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let bOffset = AppSize.HEIGHT_INVALID_BOTTOM()
+        webView.snp.makeConstraints { (m) in
+            m.top.equalTo(navigationBar.snp.bottom)
+            m.left.right.equalToSuperview()
+            m.bottom.equalToSuperview().offset(-bOffset)
+        }
+        progress.snp.makeConstraints { (m) in
+            m.top.equalTo(navigationBar.snp.bottom)
+            m.left.right.equalToSuperview()
+            m.height.equalTo(2)
+        }
+    }
     private func loadLocalFile(_ path: String) {
         let uri = URL(fileURLWithPath: path)
         let root = Kits.locatePath(.file)
@@ -253,59 +230,17 @@ extension WebBrowser {
     }
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateToolbarItems()
-        self.navigationController?.setToolbarHidden(false, animated: animated)
+        //updateToolbarItems()
+        //self.navigationController?.setToolbarHidden(false, animated: animated)
+        updateBtnStates()
     }
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setToolbarHidden(true, animated: animated)
+        //self.navigationController?.setToolbarHidden(true, animated: animated)
     }
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
-    func updateToolbarItems() {
-        backBarButtonItem.isEnabled = webView.canGoBack
-        forwardBarButtonItem.isEnabled = webView.canGoForward
-        
-        let refreshStopBarButtonItem: UIBarButtonItem = webView.isLoading ? stopBarButtonItem : refreshBarButtonItem
-        
-        let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
-        let flexibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-            
-            let toolbarWidth: CGFloat = 250.0
-            fixedSpace.width = 35.0
-            
-            let items: NSArray = sharingEnabled ? [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem, fixedSpace, actionBarButtonItem] : [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem]
-            
-            let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: toolbarWidth, height: 44.0))
-            if !closing {
-                toolbar.items = items as? [UIBarButtonItem]
-                if presentingViewController == nil {
-                    toolbar.barTintColor = navigationController!.navigationBar.barTintColor
-                } else {
-                    toolbar.barStyle = navigationController!.navigationBar.barStyle
-                }
-                toolbar.tintColor = navigationController!.navigationBar.tintColor
-            }
-            navigationItem.rightBarButtonItems = items.reverseObjectEnumerator().allObjects as? [UIBarButtonItem]
-            
-        } else {
-            let items: NSArray = sharingEnabled ? [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, actionBarButtonItem, fixedSpace] : [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, fixedSpace]
-            
-            if let navigationController = navigationController, !closing {
-                if presentingViewController == nil {
-                    navigationController.toolbar.barTintColor = navigationController.navigationBar.barTintColor
-                } else {
-                    navigationController.toolbar.barStyle = navigationController.navigationBar.barStyle
-                }
-                navigationController.toolbar.tintColor = navigationController.navigationBar.tintColor
-                toolbarItems = items as? [UIBarButtonItem]
-            }
-        }
     }
 }
 
@@ -313,7 +248,8 @@ extension WebBrowser {
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.delegate?.didStartLoading()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        updateToolbarItems()
+        //updateToolbarItems()
+        updateBtnStates()
         if let host = webView.url?.host {
             let source = "此网页由 \(host) 提供"
             sourceLab.text = source
@@ -326,7 +262,8 @@ extension WebBrowser {
         
         webView.evaluateJavaScript("document.title", completionHandler: {(response, error) in
             self.navigatorItem.title = response as! String?
-            self.updateToolbarItems()
+            //self.updateToolbarItems()
+            self.updateBtnStates()
         })
         
     }
@@ -334,7 +271,8 @@ extension WebBrowser {
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.ddiFinishedLoad(success: false)
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        updateToolbarItems()
+        //updateToolbarItems()
+        updateBtnStates()
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -385,15 +323,145 @@ extension WebBrowser {
     }
     
     func openCustomApp(urlScheme: String, additional_info:String){
-        
         if let requestUrl: URL = URL(string:"\(urlScheme)"+"\(additional_info)") {
             let application:UIApplication = UIApplication.shared
             if application.canOpenURL(requestUrl) {
-                //application.openURL(requestUrl)
                 application.open(requestUrl, options: [:], completionHandler: nil)
             }
         }
     }
+}
+
+// MARK: - 返回/关闭使能
+extension WebBrowser {
+    /// back/close
+    private func updateBtnStates() {
+        let enabled = webView.canGoBack
+        closeBtn.isEnabled = enabled
+    }
+    
+    @objc private func closeBrowser() {
+        defaultGobackStack()
+    }
+    @objc private func backwardBrowser() {
+        guard webView.canGoBack == true else {
+            defaultGobackStack()
+            return
+        }
+        webView.goBack()
+    }
+    @objc private func moreBrowserEvent() {
+        if let url: URL = ((webView.url != nil) ? webView.url : request.url) {
+            let activities: NSArray = [SBActivitySafari(), SBActivityChrome()]
+            if url.absoluteString.hasPrefix("file:///") {
+                let dc: UIDocumentInteractionController = UIDocumentInteractionController(url: url)
+                dc.presentOptionsMenu(from: view.bounds, in: view, animated: true)
+            } else {
+                let activityController: UIActivityViewController = UIActivityViewController(activityItems: [url], applicationActivities: activities as? [UIActivity])
+                
+                if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+                    let ctrl: UIPopoverPresentationController = activityController.popoverPresentationController!
+                    ctrl.sourceView = view
+                    ctrl.barButtonItem = moreBtn
+                }
+                
+                present(activityController, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+// MARK: - UIToolBar for NavigationController
+extension WebBrowser {
+    /*
+    func updateToolbarItems() {
+        backBarButtonItem.isEnabled = webView.canGoBack
+        forwardBarButtonItem.isEnabled = webView.canGoForward
+        
+        let refreshStopBarButtonItem: UIBarButtonItem = webView.isLoading ? stopBarButtonItem : refreshBarButtonItem
+        
+        let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
+        let flexibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
+            
+            let toolbarWidth: CGFloat = 250.0
+            fixedSpace.width = 35.0
+            
+            let items: NSArray = sharingEnabled ? [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem, fixedSpace, actionBarButtonItem] : [fixedSpace, refreshStopBarButtonItem, fixedSpace, backBarButtonItem, fixedSpace, forwardBarButtonItem]
+            
+            let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: toolbarWidth, height: 44.0))
+            if !closing {
+                toolbar.items = items as? [UIBarButtonItem]
+                if presentingViewController == nil {
+                    toolbar.barTintColor = navigationController!.navigationBar.barTintColor
+                } else {
+                    toolbar.barStyle = navigationController!.navigationBar.barStyle
+                }
+                toolbar.tintColor = navigationController!.navigationBar.tintColor
+            }
+            navigationItem.rightBarButtonItems = items.reverseObjectEnumerator().allObjects as? [UIBarButtonItem]
+            
+        } else {
+            let items: NSArray = sharingEnabled ? [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, actionBarButtonItem, fixedSpace] : [fixedSpace, backBarButtonItem, flexibleSpace, forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, fixedSpace]
+            
+            if let navigationController = navigationController, !closing {
+                if presentingViewController == nil {
+                    navigationController.toolbar.barTintColor = navigationController.navigationBar.barTintColor
+                } else {
+                    navigationController.toolbar.barStyle = navigationController.navigationBar.barStyle
+                }
+                navigationController.toolbar.tintColor = navigationController.navigationBar.tintColor
+                toolbarItems = items as? [UIBarButtonItem]
+            }
+        }
+    }
+    /// events
+    @objc func doneButtonTapped() {
+        closing = true
+        UINavigationBar.appearance().barStyle = storedStatusColor!
+        self.dismiss(animated: true, completion: nil)
+    }
+    @objc func goBackTapped(_ sender: UIBarButtonItem) {
+        webView.goBack()
+    }
+    
+    @objc func goForwardTapped(_ sender: UIBarButtonItem) {
+        webView.goForward()
+    }
+    
+    @objc func reloadTapped(_ sender: UIBarButtonItem) {
+        webView.reload()
+    }
+    
+    @objc func stopTapped(_ sender: UIBarButtonItem) {
+        webView.stopLoading()
+        updateToolbarItems()
+    }
+    
+    @objc func actionButtonTapped(_ sender: AnyObject) {
+        
+        if let url: URL = ((webView.url != nil) ? webView.url : request.url) {
+            let activities: NSArray = [SBActivitySafari(), SBActivityChrome()]
+            
+            if url.absoluteString.hasPrefix("file:///") {
+                let dc: UIDocumentInteractionController = UIDocumentInteractionController(url: url)
+                dc.presentOptionsMenu(from: view.bounds, in: view, animated: true)
+            }
+            else {
+                let activityController: UIActivityViewController = UIActivityViewController(activityItems: [url], applicationActivities: activities as? [UIActivity])
+                
+                if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+                    let ctrl: UIPopoverPresentationController = activityController.popoverPresentationController!
+                    ctrl.sourceView = view
+                    ctrl.barButtonItem = sender as? UIBarButtonItem
+                }
+                
+                present(activityController, animated: true, completion: nil)
+            }
+        }
+    }
+    */
 }
 
 // MARK: - Router Ext

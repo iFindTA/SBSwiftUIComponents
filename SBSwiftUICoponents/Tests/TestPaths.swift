@@ -39,7 +39,7 @@ public enum TestPaths: SBScenePathable {
     }
 }
 
-fileprivate let baseURI = "https://mp.landun.tech"
+fileprivate let baseURI = "https://sxtn.landun.tech"
 /// HTTP paths
 public enum SBHTTP {
     case void
