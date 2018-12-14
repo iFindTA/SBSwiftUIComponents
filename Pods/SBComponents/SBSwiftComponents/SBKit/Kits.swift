@@ -203,4 +203,29 @@ public struct Kits {
     private static func fetchRootProfile() -> UIViewController? {
         return UIApplication.shared.keyWindow?.rootViewController
     }
+    
+    /// alert弹出（确定/取消）
+    public static func alert(_ desc: String, preEnsure: Bool=true, completion:@escaping VoidClosure) {
+        let alert = UIAlertController(title: "", message: desc, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let ensure = UIAlertAction(title: "确定", style: .default) { (act) in
+            completion()
+        }
+        if preEnsure == false {
+            alert.addAction(cancel)
+            alert.addAction(ensure)
+        } else {
+            alert.addAction(ensure)
+            alert.addAction(cancel)
+        }
+        guard let rooter = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+        rooter.present(alert, animated: true, completion: nil)
+    }
+    
+    /// 每行资源行数
+    public static func rows4NumPerLine(_ all: Int, with per: Int=2) -> Int {
+        return Int(ceil(Double(all)/Double(per)))
+    }
 }

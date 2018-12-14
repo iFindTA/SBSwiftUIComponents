@@ -80,6 +80,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BallLoading.configure()
         TPOpen.shared.install()
+        
+        WebBrowser.configure("dyyj") { (params) in
+            guard let uri = params["url"] as? URL else {
+                return
+            }
+            debugPrint(uri.absoluteString)
+        }
     }
 }
 

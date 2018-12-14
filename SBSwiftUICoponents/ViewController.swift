@@ -169,7 +169,7 @@ class ViewController: UIViewController {
     }
     @objc private func testWebBrowser() {
         var p = SBParameter()
-        p["url"] = "https://baidu.com/"
+        p["url"] = "http://wap.landun.tech/h5/score.html"
         let browser = WebBrowser(p)
         self.navigationController?.pushViewController(browser, animated: true)
     }
@@ -230,6 +230,5 @@ class ViewController: UIViewController {
         }
         Kits.makeToast("test for sb toaster")
     }
-
 }
 

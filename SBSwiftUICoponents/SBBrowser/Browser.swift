@@ -14,14 +14,19 @@ public protocol SBWebDelegate: class {
     func ddiFinishedLoad(success: Bool)
 }
 
-public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
+//MARK: - configures
+fileprivate var SchemeThis: String = "nanhu"
+fileprivate var SchemeRedirect: String = "cancelSchemeRedirect()"
+fileprivate var SchemeThisClosure: AnyClosure?
+
+public class WebBrowser: BaseProfile {
     
     /// -- Variables
     private lazy var webView: WKWebView = {
-        var w = WKWebView(frame: .zero)
-        w.uiDelegate = self
-        w.navigationDelegate = self
-        w.addObserver(self, forKeyPath: "estimatedProgress", options: [.new], context: nil)
+        let cfg = WKWebViewConfiguration()
+        cfg.preferences.minimumFontSize = 12
+        cfg.preferences.javaScriptCanOpenWindowsAutomatically = true
+        var w = WKWebView(frame: .zero, configuration: cfg)
         w.scrollView.addSubview(sourceLab)
         return w
     }()
@@ -131,6 +136,15 @@ public class WebBrowser: BaseProfile, WKUIDelegate, WKNavigationDelegate {
     }()
     */
     
+    public class func configure(_ scheme: String, with redirect: String="cancelSchemeRedirect()", completion: @escaping AnyClosure) {
+        guard scheme.isEmpty == false else {
+            return
+        }
+        SchemeThis = scheme
+        SchemeRedirect = redirect
+        SchemeThisClosure = completion
+    }
+    
     /// progress
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard let o = object as? WKWebView else {
@@ -171,6 +185,9 @@ extension WebBrowser {
         navigationBar.pushItem(navigatorItem, animated: true)
         
         /// webview
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: [.new], context: nil)
         view.addSubview(webView)
         
         /// progress
@@ -243,8 +260,21 @@ extension WebBrowser {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
-
-extension WebBrowser {
+// MARK: - Browser Protocols - WKNavigationDelegate
+extension WebBrowser: WKUIDelegate {
+    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok", style: .default) { (action: UIAlertAction) -> Void in
+            
+        }
+        alert.addAction(ok)
+        present(alert, animated: true)
+        completionHandler()
+    }
+}
+// MARK: - Browser Protocols - WKNavigationDelegate
+extension WebBrowser: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.delegate?.didStartLoading()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -265,7 +295,6 @@ extension WebBrowser {
             //self.updateToolbarItems()
             self.updateBtnStates()
         })
-        
     }
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -278,12 +307,9 @@ extension WebBrowser {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         let url = navigationAction.request.url
-        
         let hostAddress = navigationAction.request.url?.host
-        
         if (navigationAction.targetFrame == nil) {
             if UIApplication.shared.canOpenURL(url!) {
-                //UIApplication.shared.openURL(url!)
                 UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             }
         }
@@ -291,7 +317,6 @@ extension WebBrowser {
         // To connnect app store
         if hostAddress == "itunes.apple.com" {
             if UIApplication.shared.canOpenURL(navigationAction.request.url!) {
-                //UIApplication.shared.openURL(navigationAction.request.url!)
                 UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
                 return
@@ -299,27 +324,30 @@ extension WebBrowser {
         }
         
         let url_elements = url!.absoluteString.components(separatedBy: ":")
-        
         switch url_elements[0] {
         case "tel":
             openCustomApp(urlScheme: "telprompt://", additional_info: url_elements[1])
             decisionHandler(.cancel)
-            
         case "sms":
             openCustomApp(urlScheme: "sms://", additional_info: url_elements[1])
             decisionHandler(.cancel)
-            
         case "mailto":
             openCustomApp(urlScheme: "mailto://", additional_info: url_elements[1])
             decisionHandler(.cancel)
-            
+        case SchemeThis:
+            if let uri = url {
+                var p = [String: Any]()
+                p["url"] = uri
+                SchemeThisClosure?(p)
+            }
+            webView.evaluateJavaScript(SchemeRedirect) { (ret, err) in
+                debugPrint(err?.localizedDescription ?? "")
+                debugPrint(ret ?? "")
+            }
+            decisionHandler(.cancel)
         default:
-            //print("Default")
-            break
+            decisionHandler(.allow)
         }
-        
-        decisionHandler(.allow)
-        
     }
     
     func openCustomApp(urlScheme: String, additional_info:String){

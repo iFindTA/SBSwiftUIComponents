@@ -279,7 +279,7 @@ class TAliHandler: NSObject {
 @objc protocol ActiveProtocol {
     @objc optional func active(_ map: [String: Any], with type: ActiveType)
 }
-// MARK: - 扫码/网页universal-link 打开app
+// MARK: - universal-link 打开app
 class TUniversalHandler: NSObject {
     public static let shared = TUniversalHandler()
     private override init() {}

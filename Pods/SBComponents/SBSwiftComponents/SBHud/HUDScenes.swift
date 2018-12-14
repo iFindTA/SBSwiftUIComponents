@@ -6,7 +6,7 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// loading ball
 fileprivate let ballSize: CGFloat = 13
