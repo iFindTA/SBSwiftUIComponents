@@ -152,7 +152,7 @@ public class TPOpen: NSObject {
             return true
         }
         
-        return true
+        return false
     }
 }
 
