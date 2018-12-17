@@ -6,7 +6,6 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import DTCoreText
 import SBComponents
 
 public let DefaultWidth: CGFloat = AppSize.WIDTH_SCREEN - HorizontalOffsetMid*2
@@ -81,7 +80,7 @@ class RichAttrPanel: BaseScene {
             return
         }
         let tmpAttr = NSMutableAttributedString(attributedString: attr)
-        let availableWidth = AppSize.WIDTH_SCREEN - HorizontalOffsetMid*2
+        //let availableWidth = AppSize.WIDTH_SCREEN - HorizontalOffsetMid*2
         tmpAttr.enumerateAttribute(NSAttributedString.Key.attachment, in: NSMakeRange(0, attr.length), options: NSAttributedString.EnumerationOptions(rawValue: 0), using: { (value, range, stop) in
             if let attachment = value as? NSTextAttachment {
                 let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)
