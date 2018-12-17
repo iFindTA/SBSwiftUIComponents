@@ -132,13 +132,13 @@ public class CommentOnScene: BaseScene {
     }
     
     private func willRelease() {
-        let inputs = inputBar.input.text
-        guard inputs?.isEmpty == false else {
+        let inputs = (inputBar.input.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        guard inputs.isEmpty == false else {
             Kits.makeToast("说点什么吧...")
             return
         }
         dismiss()
-        callback?(inputs!)
+        callback?(inputs)
     }
 }
 // MARK: - Keyboard Observes
