@@ -12,7 +12,7 @@ import SBComponents
 public let DefaultWidth: CGFloat = AppSize.WIDTH_SCREEN - HorizontalOffsetMid*2
 
 /// rich html panel (do not support gif/video)
-class HtmlPanel: BaseScene {
+class RichAttrPanel: BaseScene {
     /// vars
     private var horizontalOffset: CGFloat = HorizontalOffsetMid
     private var topOffset: CGFloat = HorizontalOffset
@@ -37,8 +37,8 @@ class HtmlPanel: BaseScene {
         return s
     }()
     
-    public class func panel(_ width: CGFloat=DefaultWidth, with top: CGFloat=HorizontalOffset, and bottom: CGFloat=HorizontalOffset) -> HtmlPanel {
-        return HtmlPanel(width, with: top, and: bottom)
+    public class func panel(_ width: CGFloat=DefaultWidth, with top: CGFloat=HorizontalOffset, and bottom: CGFloat=HorizontalOffset) -> RichAttrPanel {
+        return RichAttrPanel(width, with: top, and: bottom)
     }
     private init(_ width: CGFloat, with top: CGFloat=HorizontalOffset, and bottom: CGFloat=HorizontalOffset) {
         super.init(frame: .zero)

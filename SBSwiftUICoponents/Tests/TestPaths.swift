@@ -45,6 +45,7 @@ public enum SBHTTP {
     case void
     case test
     case html(Int)
+    case artical(Int)
     
     var method: HTTPMethod {
         switch self {
@@ -60,6 +61,8 @@ public enum SBHTTP {
             return "app"
         case .html(let gid):
             return "prod/item/\(gid).json"
+        case .artical(let aid):
+            return "osr/article/\(aid).json"
         default:
             return ""
         }

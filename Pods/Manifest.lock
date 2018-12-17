@@ -28,31 +28,31 @@ PODS:
     - RealReachability/Ping (= 1.3.0)
   - RealReachability/Connection (1.3.0)
   - RealReachability/Ping (1.3.0)
-  - SBComponents/Base (0.6.2):
+  - SBComponents/Base (0.6.3):
     - PPBadgeViewSwift
     - SBComponents/HTTPRouter
-  - SBComponents/Error (0.6.2)
-  - SBComponents/Extension (0.6.2):
+  - SBComponents/Error (0.6.3)
+  - SBComponents/Extension (0.6.3):
     - SnapKit
-  - SBComponents/HTTPRouter (0.6.2):
+  - SBComponents/HTTPRouter (0.6.3):
     - Alamofire
     - SBComponents/Error
     - SBComponents/Hud
     - SBComponents/Macros
     - SwiftyJSON
-  - SBComponents/HTTPState (0.6.2):
+  - SBComponents/HTTPState (0.6.3):
     - RealReachability
     - SBComponents/Macros
-  - SBComponents/Hud (0.6.2):
+  - SBComponents/Hud (0.6.3):
     - SBComponents/Macros
-  - SBComponents/Kit (0.6.2):
+  - SBComponents/Kit (0.6.3):
     - SBComponents/Base
     - SBComponents/Error
     - SBToaster
-  - SBComponents/Macros (0.6.2):
+  - SBComponents/Macros (0.6.3):
     - SBComponents/Error
     - SBComponents/Extension
-  - SBComponents/SceneRouter (0.6.2):
+  - SBComponents/SceneRouter (0.6.3):
     - SBComponents/Base
     - SBComponents/Error
     - SBComponents/Macros
@@ -70,10 +70,10 @@ DEPENDENCIES:
   - FSPagerView (~> 0.8.1)
   - GDPerformanceView-Swift (~> 2.0.2)
   - IQKeyboardManagerSwift (~> 6.2.0)
-  - SBComponents/Base (~> 0.6.2)
-  - SBComponents/HTTPState (~> 0.6.2)
-  - SBComponents/Kit (~> 0.6.2)
-  - SBComponents/SceneRouter (~> 0.6.2)
+  - SBComponents/Base (~> 0.6.3)
+  - SBComponents/HTTPState (~> 0.6.3)
+  - SBComponents/Kit (~> 0.6.3)
+  - SBComponents/SceneRouter (~> 0.6.3)
   - SBPullToRefresh (~> 2.9)
   - SDWebImage/Core
   - SJNavigationPopGesture (~> 1.4.7)
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   PPBadgeViewSwift: 96a41852df7437e9d948565a1bc894f757c29933
   RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
-  SBComponents: c23c81fde5a7d796f1e19c93c936ba13315abac4
+  SBComponents: c51d081931a47312606ee18fdcf5a688040ef38d
   SBPullToRefresh: e3c42add2d79c39c34844423e9ee75c8e980eef2
   SBToaster: ffea00ad8c38eb80e6800c0fee5bc9b4c184252b
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
@@ -117,6 +117,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 0efbfc4868fc29ee38ae5bf1545567a808729893
+PODFILE CHECKSUM: 7553925629b339b70a73ef29545ba904bba7ef1c
 
 COCOAPODS: 1.6.0.beta.2

@@ -24,6 +24,7 @@ public typealias TagClosure = (Int)->Void
 public typealias VoidClosure = ()->Void
 public typealias BoolClosure = (Bool)->Void
 public typealias StringClosure = (String)->Void
+public typealias DoubleClosure = (Double)->Void
 public typealias ErrorClosure = (BaseError?)->Void
 public typealias SBParameter = [String: Any]
 
@@ -206,6 +207,7 @@ public enum SBUserPath: Int {
 // MARK: - app显示类型
 public enum SceneType: Int {
     case none
+    case guide
     case main
     case oauth
     case visitor

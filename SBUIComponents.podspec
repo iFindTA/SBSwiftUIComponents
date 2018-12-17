@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SBUIComponents"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "a swift base ui components"
   s.description  = <<-DESC
        一个swift的UI基础库，包括BaseScene, BaseProfile, BaseInput etc.
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios,'10.0'
   s.source       = { :git => "https://github.com/iFindTA/SBSwiftUIComponents.git", :tag => "#{s.version}" }
   s.ios.deployment_target = '10.0'
-  s.framework    = "UIKit","Foundation"
+  s.framework    = "UIKit","WebKit","Foundation"
   s.requires_arc = true
   #s.dependency 
 
@@ -38,8 +38,6 @@ Pod::Spec.new do |s|
   s.subspec 'Panels' do |pn|
     pn.source_files = "SBSwiftUICoponents/SBPanels/*.swift"
     pn.dependency 'SBComponents/Base'
-    pn.dependency 'DTCoreText'
-    pn.dependency 'SDWebImage/Core'
   end
 
   s.subspec 'Scenes' do |ss|
