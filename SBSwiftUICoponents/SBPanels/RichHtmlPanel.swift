@@ -116,7 +116,7 @@ public class RichHtmlPanel: BaseScene {
             return
         }
         let header = "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta  name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/></head>"
-        let body = "<body style='width:100%;background-color:white;padding:0px;margin:0px;display:block;'><style>p{margin:0 !important;}</style>"
+        let body = "<body style='width:100%;background-color:white;padding:0px;margin:0px;display:block;'><style>p,section{margin:0 !important;width: 100% !important;}</style>"
         let div = "<div id='rootid' style = 'width:100%;height:10px;background-color:white;display:block'></div>"
         let html = String(format: "<html> %@ %@ %@ </body></html>", header, body, rich, div)
         webView.loadHTMLString(html, baseURL: nil)
