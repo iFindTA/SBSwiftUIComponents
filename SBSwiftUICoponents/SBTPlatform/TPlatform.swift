@@ -15,6 +15,7 @@ import SBComponents
 public typealias TPShareCallback = (TPlatform)->Void
 public let TPShareSceneHeight: CGFloat = 200
 
+/// echo 'ibase=10;obase=16;801312852'|bc
 fileprivate let THIRD_WX_APPID = "wxfa827e3c1a13590e"
 fileprivate let THIRD_WX_APPSECRET = "1c07b1856958233045ea2892f7c4f444"
 fileprivate let THIRD_QQ_APPID = "1107800935"
