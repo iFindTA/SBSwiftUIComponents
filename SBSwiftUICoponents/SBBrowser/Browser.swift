@@ -7,6 +7,7 @@
 //
 
 import WebKit
+import SDWebImage
 import SBComponents
 
 public protocol SBWebDelegate: class {
@@ -379,22 +380,47 @@ extension WebBrowser {
     }
     @objc private func moreBrowserEvent() {
         if let url: URL = ((webView.url != nil) ? webView.url : request.url) {
-            let activities: NSArray = [SBActivitySafari(), SBActivityChrome()]
             if url.absoluteString.hasPrefix("file:///") {
                 let dc: UIDocumentInteractionController = UIDocumentInteractionController(url: url)
                 dc.presentOptionsMenu(from: view.bounds, in: view, animated: true)
             } else {
-                let activityController: UIActivityViewController = UIActivityViewController(activityItems: [url], applicationActivities: activities as? [UIActivity])
-                
-                if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-                    let ctrl: UIPopoverPresentationController = activityController.popoverPresentationController!
-                    ctrl.sourceView = view
-                    ctrl.barButtonItem = moreBtn
+                guard let imgUri = params?["img"] as? String, imgUri.count > 0 else {
+                    openActivityProfile(url, img: nil)
+                    return
                 }
-                
-                present(activityController, animated: true, completion: nil)
+                BallLoading.show()
+                SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+                    BallLoading.hide()
+                    guard let icon = image else {
+                        Kits.makeToast("图片数据错误！")
+                        return
+                    }
+                    /// compress
+                    let compressed = icon.sb_compress(32768)
+                    /// call activity profile
+                    self?.openActivityProfile(url, img: compressed)
+                }
             }
         }
+    }
+    /// 分享图片
+    private func openActivityProfile(_ url: URL, img binary: UIImage?) {
+        var items = [Any]()
+        items.append(navigatorItem.title ?? "")
+        if let icon = binary {
+            items.append(icon)
+        }
+        items.append(url)
+        
+        /// call activity profile
+        let activities: NSArray = [SBActivitySafari(), SBActivityChrome()]
+        let activityController: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: activities as? [UIActivity])
+        if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 && UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            let ctrl: UIPopoverPresentationController = activityController.popoverPresentationController!
+            ctrl.sourceView = view
+            ctrl.barButtonItem = moreBtn
+        }
+        present(activityController, animated: true, completion: nil)
     }
 }
 

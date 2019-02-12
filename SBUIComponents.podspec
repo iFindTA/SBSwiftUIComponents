@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SBUIComponents"
-  s.version      = "0.0.9"
+  s.version      = "1.0.0"
   s.summary      = "a swift base ui components"
   s.description  = <<-DESC
        一个swift的UI基础库，包括BaseScene, BaseProfile, BaseInput etc.
@@ -70,6 +70,7 @@ Pod::Spec.new do |s|
     w.source_files = "SBSwiftUICoponents/SBBrowser/*.swift"
     w.resources = "SBSwiftUICoponents/SBBrowser/Assets/*.*"
     w.framework = "WebKit"
+    w.dependency 'SDWebImage/Core'
     w.dependency 'SBComponents/Kit'
     w.dependency 'SBComponents/Base'
     w.dependency 'SBComponents/SceneRouter'
