@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SBUIComponents"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "a swift base ui components"
   s.description  = <<-DESC
        一个swift的UI基础库，包括BaseScene, BaseProfile, BaseInput etc.

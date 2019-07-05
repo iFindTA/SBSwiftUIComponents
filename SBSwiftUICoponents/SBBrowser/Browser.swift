@@ -7,8 +7,8 @@
 //
 
 import WebKit
-import SDWebImage
 import SBComponents
+import SDWebImage.SDWebImageDownloader
 
 public protocol SBWebDelegate: class {
     func didStartLoading()
