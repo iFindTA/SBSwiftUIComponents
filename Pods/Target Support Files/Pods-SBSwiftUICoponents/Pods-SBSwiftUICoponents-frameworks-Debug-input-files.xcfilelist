@@ -1,0 +1,18 @@
+${PODS_ROOT}/Target Support Files/Pods-SBSwiftUICoponents/Pods-SBSwiftUICoponents-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework
+${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework
+${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework
+${BUILT_PRODUCTS_DIR}/EmptyDataSet-Swift/EmptyDataSet_Swift.framework
+${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework
+${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework
+${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
+${BUILT_PRODUCTS_DIR}/PPBadgeViewSwift/PPBadgeViewSwift.framework
+${BUILT_PRODUCTS_DIR}/RealReachability/RealReachability.framework
+${BUILT_PRODUCTS_DIR}/SBComponents/SBComponents.framework
+${BUILT_PRODUCTS_DIR}/SBPullToRefresh/SBPullToRefresh.framework
+${BUILT_PRODUCTS_DIR}/SBToaster/SBToaster.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SJNavigationPopGesture/SJNavigationPopGesture.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

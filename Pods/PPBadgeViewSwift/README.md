@@ -6,7 +6,7 @@ iOS自定义Badge组件, 支持UIView, UITabBarItem, UIBarButtonItem以及子类
 
 #### 原理请戳: [掘金地址](https://juejin.im/post/594a69808d6d8109de2c5a06) 、 [简书地址](http://www.jianshu.com/p/89fa23d53400)
 
-![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C%2FSwift%204.x-orange.svg)  ![](https://img.shields.io/badge/pod%20Objc-2.1.0-blue.svg)  ![](https://img.shields.io/cocoapods/dt/PPBadgeView.svg)  ![](https://img.shields.io/badge/pod%20Swift-2.2.1-blue.svg)  ![](https://img.shields.io/cocoapods/dt/PPBadgeViewSwift.svg)  ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-jkpang--%E5%BA%9E-red.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1) 
+![](https://img.shields.io/badge/platform-iOS-red.svg)  ![](https://img.shields.io/badge/language-Objective--C%2FSwift%205.0-orange.svg)  ![](https://img.shields.io/badge/pod%20Objc-3.1.0-blue.svg)  ![](https://img.shields.io/cocoapods/dt/:PPBadgeView.svg)  ![](https://img.shields.io/badge/pod%20Swift-3.1.0-blue.svg)  ![](https://img.shields.io/cocoapods/dt/PPBadgeViewSwift.svg)  ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)  [![](https://img.shields.io/badge/weibo-jkpang--%E5%BA%9E-red.svg)](http://weibo.com/5743737098/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1) 
 
 ![iPhone](https://github.com/jkpang/PPBadgeView/blob/master/Picture/PPBadgeView.gif)
 
@@ -30,6 +30,15 @@ iOS自定义Badge组件, 支持UIView, UITabBarItem, UIBarButtonItem以及子类
 如果发现pod search PPBadgeView/PPBadgeViewSwift 不是最新版本，在终端执行pod setup命令更新本地spec镜像缓存(时间可能有点长),重新搜索就OK了
 
 If you find pod search PPBadgeView / PPBadgeViewSwift is not the latest version, in the terminal  of the pod setup command to update the local spec image cache and re-search. (it may take you a long time)
+
+### 3.Carthage (Swift):
+```
+// Cartfile
+github "jkpang/PPBadgeView" ~> 3.0.0
+
+// Terminal
+carthage update --platform iOS
+```
 
 ## Usage 使用方法
 ##### 1. Objective-C :

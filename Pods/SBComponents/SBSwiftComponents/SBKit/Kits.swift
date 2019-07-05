@@ -187,8 +187,11 @@ public struct Kits {
             if let rooter = self.fetchRootProfile() {
                 rooter.present(alert, animated: true, completion: nil)
             } else {
-                makeToast("当前授权已过期，请重新登录！")
+                makeToast(e.desc)
             }
+            return
+        } else if e.code == SBHTTPRespCode.innerError.rawValue {
+            makeToast(e.desc)
             return
         }
         makeToast(e.errDescription)

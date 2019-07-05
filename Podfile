@@ -30,8 +30,8 @@ pod 'FSPagerView', '~> 0.8.1'
 pod 'CHIPageControl/Jaloro', '~> 0.1.7'
 
 #sb
-pod 'SBComponents/Kit', '~> 0.6.3'
-pod 'SBComponents/Base', '~> 0.6.3'
-pod 'SBComponents/HTTPState', '~> 0.6.3'
-pod 'SBComponents/SceneRouter', '~> 0.6.3'
+pod 'SBComponents/Kit', '~> 0.6.7'
+pod 'SBComponents/Base', '~> 0.6.7'
+pod 'SBComponents/HTTPState', '~> 0.6.7'
+pod 'SBComponents/SceneRouter', '~> 0.6.7'
 end

@@ -143,4 +143,8 @@ public extension String {
         let statusYearStr = DateYearFmt.shared.fmt.string(from: Date())
         return currentYearStr == statusYearStr
     }
+    
+    public func sb_trimmings() -> String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 }

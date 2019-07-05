@@ -19,6 +19,7 @@ public class CountDownButton: UIButton {
     private var seconds: Int = 0
     private var totalSeconds: Int = 0
     private var timer: Timer?
+    private var isCounting: Bool = false
     
     /// Callbacks
     public var didTrigger: CountDownTriggerHandler?
@@ -34,6 +35,9 @@ public class CountDownButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     @objc private func didTouched() {
+        guard isCounting == false else {
+            return
+        }
         let __tag = self.tag
         DispatchQueue.main.async {[weak self] in
             self?.didTrigger?(__tag)
@@ -51,8 +55,13 @@ public class CountDownButton: UIButton {
             t.invalidate()
         }
         timer = nil
+        isCounting = false
     }
     public func start(_ total: Int) {
+        guard isCounting == false else {
+            return
+        }
+        isCounting = true
         seconds = total
         totalSeconds = total
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fired), userInfo: nil, repeats: true)

@@ -53,7 +53,7 @@ public struct Macros {
     public static let APP_AUDIO_DID_END = "APP_AUDIO_DID_END"
     
     /// 正则表达式
-    public static let REGULAR_MOBILE = "^1+[34578]+\\d{9}"
+    public static let REGULAR_MOBILE = "^1+[3456789]+\\d{9}"
     
     /// 输入长度限制
     public static let LENGTH_PWD_MIN: Int = 6
@@ -188,8 +188,9 @@ public struct AppColor {
 
 // MARK: - 网络定义
 public enum SBHTTPRespCode: Int {
-    case unAuthorization = 401  //未授权
-    case forbidden = 403        //禁止访问 没有权限
+    case unAuthorization = 401  ///  未授权
+    case forbidden = 403        ///  禁止访问 
+    case innerError = 500       ///  内部错误
 }
 
 // MARK: - 用户沙盒类型
