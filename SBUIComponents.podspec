@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SBUIComponents"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "a swift base ui components"
   s.description  = <<-DESC
        一个swift的UI基础库，包括BaseScene, BaseProfile, BaseInput etc.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   s.subspec 'Banner' do |bn|
     bn.source_files = "SBSwiftUICoponents/SBBanner/*.swift"
     bn.dependency 'FSPagerView'
-    bn.dependency 'SDWebImage/Core'
+    bn.dependency 'SDWebImage'
     bn.dependency 'CHIPageControl/Jaloro'
     bn.dependency 'SBComponents/Macros'
   end
@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
     ss.source_files = "SBSwiftUICoponents/SBScenes/*.swift"
     ss.resources = "SBSwiftUICoponents/SBScenes/Assets/*.*"
     ss.dependency 'SBComponents/Kit'
-    ss.dependency 'SDWebImage/Core'
+    ss.dependency 'SDWebImage'
     ss.dependency 'IQKeyboardManagerSwift'
   end
 
@@ -70,7 +70,7 @@ Pod::Spec.new do |s|
     w.source_files = "SBSwiftUICoponents/SBBrowser/*.swift"
     w.resources = "SBSwiftUICoponents/SBBrowser/Assets/*.*"
     w.framework = "WebKit"
-    w.dependency 'SDWebImage/Core'
+    w.dependency 'SDWebImage'
     w.dependency 'SBComponents/Kit'
     w.dependency 'SBComponents/Base'
     w.dependency 'SBComponents/SceneRouter'
