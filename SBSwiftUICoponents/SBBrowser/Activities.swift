@@ -53,8 +53,12 @@ public class SBActivitySafari: SBActivity {
     override public func perform() {
         //let completed: Bool = UIApplication.shared.openURL(URLToOpen! as URL)
         //activityDidFinish(completed)
-        UIApplication.shared.open(URLToOpen!, options: [:]) { [weak self](finished) in
-            self?.activityDidFinish(finished)
+        if #available(iOS 10.0.0, *) {
+            UIApplication.shared.open(URLToOpen!, options: [:]) { [weak self](finished) in
+                self?.activityDidFinish(finished)
+            }
+        } else {
+            UIApplication.shared.openURL(URLToOpen!)
         }
     }
 }
@@ -94,7 +98,11 @@ public class SBActivityChrome: SBActivity {
             let chromeURL: URL! = URL(string: chromeURLString)
             // Open the URL with Chrome.
             //UIApplication.shared.openURL(chromeURL)
-            UIApplication.shared.open(chromeURL, options: [:], completionHandler: nil)
+            if #available(iOS 10.0.0, *) {
+                UIApplication.shared.open(chromeURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(URLToOpen!)
+            }
         }
     }
 }

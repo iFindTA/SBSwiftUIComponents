@@ -310,15 +310,25 @@ extension WebBrowser: WKNavigationDelegate {
         let hostAddress = navigationAction.request.url?.host
         if (navigationAction.targetFrame == nil) {
             if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                if #available(iOS 10.0.0, *) {
+                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url!)
+                }
             }
         }
         
         // To connnect app store
         if hostAddress == "itunes.apple.com" {
             if UIApplication.shared.canOpenURL(navigationAction.request.url!) {
-                UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
-                decisionHandler(.cancel)
+                if UIApplication.shared.canOpenURL(url!) {
+                    if #available(iOS 10.0.0, *) {
+                        UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(navigationAction.request.url!)
+                    }
+                    decisionHandler(.cancel)
+                }
                 return
             }
         }
@@ -354,7 +364,11 @@ extension WebBrowser: WKNavigationDelegate {
         if let requestUrl: URL = URL(string:"\(urlScheme)"+"\(additional_info)") {
             let application:UIApplication = UIApplication.shared
             if application.canOpenURL(requestUrl) {
-                application.open(requestUrl, options: [:], completionHandler: nil)
+                if #available(iOS 10.0.0, *) {
+                   application.open(requestUrl, options: [:], completionHandler: nil)
+                } else {
+                    application.openURL(requestUrl)
+                }
             }
         }
     }

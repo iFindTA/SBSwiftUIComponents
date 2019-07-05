@@ -65,10 +65,11 @@ class TestHtmlProfile: BaseProfile {
         #else
         layouter.addSubview(htmlLabel)
         #endif
-        
+        #if DEBUG
         richPanel.callback = {[weak self](height) in
             self?.updateRichPanel(height)
         }
+        #endif
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -89,17 +90,15 @@ class TestHtmlProfile: BaseProfile {
         }
         #endif
     }
+    #if DEBUG
     private func updateRichPanel(_ height: Double) {
         richPanel.snp.removeConstraints()
         richPanel.snp.makeConstraints { (m) in
             m.edges.equalToSuperview()
             m.height.equalTo(height)
         }
-        
-//        let size = CGSize(width: AppSize.WIDTH_SCREEN, height: CGFloat(height))
-//        let rf = CGRect(origin: .zero, size: size)
-//        richPanel.frame = rf
     }
+    #endif
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SBHTTPRouter.shared.fetch(SBHTTP.html(58)) { [weak self](res, err, _) in
@@ -112,11 +111,11 @@ class TestHtmlProfile: BaseProfile {
     }
     private func handle(_ json: JSON?) {
         let desc = json?["desc"].stringValue
-        let htmlString = "<html><body> \(desc ?? "empty for displaying") </body></html>"
+        var htmlString = "<html><body> \(desc ?? "empty for displaying") </body></html>"
         #if DEBUG
         richPanel.update(desc ?? "")
         #else
-        let htmlString = "<html><body> \(desc ?? "empty for displaying") <style> section {margin: 0 !important; width: 100% !important;} p {margin: 0 !important; width: 100% !important;}</style></body></html>"
+        htmlString = "<html><body> \(desc ?? "empty for displaying") <style> section {margin: 0 !important; width: 100% !important;} p {margin: 0 !important; width: 100% !important;}</style></body></html>"
         let data = htmlString.data(using: String.Encoding.unicode)! // mind "!"
         let attrStr = try? NSAttributedString( // do catch
             data: data,

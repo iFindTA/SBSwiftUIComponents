@@ -248,8 +248,12 @@ fileprivate class QRScanView: UIView {
         if lineAnimator == nil {
             lineAnimator = QRLineAnimator(frame: .zero);
         }
-        let img = QRScanProfile.bundledImage(named: "qr_scan_line")
-        self.lineAnimator?.startAnimating(self.scanRectangleRect, parentView: self, image: img!)
+        if #available(iOS 10.0, *) {
+            let img = QRScanProfile.bundledImage(named: "qr_scan_line")
+            self.lineAnimator?.startAnimating(self.scanRectangleRect, parentView: self, image: img!)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     public func stopScanAnimation() {
@@ -259,6 +263,7 @@ fileprivate class QRScanView: UIView {
 
 // MARK: - QR Scan Engine
 typealias scanEngileCallback = (_ error: Error?) -> Void
+@available(iOS 10.0, *)
 fileprivate class QRScanEngine: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     var callback: scanEngileCallback?
     var bNeedScanResult: Bool = false
@@ -276,6 +281,8 @@ fileprivate class QRScanEngine: NSObject, AVCaptureMetadataOutputObjectsDelegate
     private var output: AVCaptureMetadataOutput?
     private var session: AVCaptureSession?
     private var preview: AVCaptureVideoPreviewLayer?
+    // 拍照设备
+    private var stillOutput: AVCaptureStillImageOutput?
     private var stillImageOutput: AVCapturePhotoOutput?//拍照
     
     override init() {
@@ -315,11 +322,16 @@ fileprivate class QRScanEngine: NSObject, AVCaptureMetadataOutputObjectsDelegate
             output?.rectOfInterest = scanRect
         }
         //setup still image file output
-        stillImageOutput = AVCapturePhotoOutput()
         var outputSettings = [String: String]()
         outputSettings[AVVideoCodecKey] = AVVideoCodecJPEG
-        let photoSetting = AVCapturePhotoSettings(format: outputSettings)
-        stillImageOutput?.photoSettingsForSceneMonitoring = photoSetting
+        if #available(iOS 10.0.0, *) {
+            stillImageOutput = AVCapturePhotoOutput()
+            let photoSetting = AVCapturePhotoSettings(format: outputSettings)
+            stillImageOutput?.photoSettingsForSceneMonitoring = photoSetting
+        } else {
+            stillOutput = AVCaptureStillImageOutput()
+            stillOutput?.outputSettings = outputSettings
+        }
         
         //session
         session = AVCaptureSession()
@@ -332,8 +344,14 @@ fileprivate class QRScanEngine: NSObject, AVCaptureMetadataOutputObjectsDelegate
         if session!.canAddOutput(output!) {
             session?.addOutput(output!)
         }
-        if session!.canAddOutput(stillImageOutput!) {
-            session?.addOutput(stillImageOutput!)
+        if #available(iOS 10.0.0, *) {
+            if session!.canAddOutput(stillImageOutput!) {
+                session?.addOutput(stillImageOutput!)
+            }
+        } else {
+            if session!.canAddOutput(stillOutput!) {
+                session?.addOutput(stillOutput!)
+            }
         }
         
         //码类型
@@ -459,6 +477,7 @@ fileprivate class QRScanEngine: NSObject, AVCaptureMetadataOutputObjectsDelegate
 
 // MARK: - ==================================================================================================
 // MARK: - QR Scan Profile
+@available(iOS 10.0, *)
 open class QRScanProfile: BaseProfile {
     /// - Variables
     lazy private var scanView: QRScanView = {
@@ -504,6 +523,21 @@ open class QRScanProfile: BaseProfile {
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
+        
+        self.view.addSubview(self.navigationBar)
+        let sapce = Kits.barSpacer()
+        let back = Kits.defaultBackBarItem(self, action: #selector(defaultGobackStack))
+        let Item = UINavigationItem(title: "扫一扫")
+        Item.leftBarButtonItems = [sapce, back];
+        navigationBar.pushItem(Item, animated: true)
+        
+        //add scan view
+        view.insertSubview(self.scanView, belowSubview: navigationBar)
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
@@ -602,27 +636,14 @@ open class QRScanProfile: BaseProfile {
 }
 
 // MARK: - UI-Layouts
+@available(iOS 10.0, *)
 extension QRScanProfile {
     class func bundledImage(named: String) -> UIImage? {
-        let image = UIImage(named: named)
+        var image = UIImage(named: named)
         if image == nil {
-            return UIImage(named: named, in: Bundle(for: QRScanProfile.classForCoder()), compatibleWith: nil)
+            image = UIImage(named: named, in: Bundle(for: QRScanProfile.classForCoder()), compatibleWith: nil)
         } // Replace MyBasePodClass with yours
         return image
-    }
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.black
-        
-        self.view.addSubview(self.navigationBar)
-        let sapce = Kits.barSpacer()
-        let back = Kits.defaultBackBarItem(self, action: #selector(defaultGobackStack))
-        let Item = UINavigationItem(title: "扫一扫")
-        Item.leftBarButtonItems = [sapce, back];
-        navigationBar.pushItem(Item, animated: true)
-        
-        //add scan view
-        view.insertSubview(self.scanView, belowSubview: navigationBar)
     }
     
     /// 子类选择UI
@@ -697,6 +718,7 @@ extension QRScanProfile {
             make.right.equalTo(line.snp.left)
         }
         btn.sb_fixImagePosition(.top, spacing: AppSize.WIDTH_DIS)
+        
         icon = QRScanProfile.bundledImage(named: "qr_icon_input")
         btn = BaseButton(type: .custom)
         btn.titleLabel?.font = smallFont
