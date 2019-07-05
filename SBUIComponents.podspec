@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SBUIComponents"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "a swift base ui components"
   s.description  = <<-DESC
        一个swift的UI基础库，包括BaseScene, BaseProfile, BaseInput etc.
@@ -10,9 +10,9 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/iFindTA/"
   s.license      = "MIT"
   s.author       = { "nanhu" => "nanhujiaju@gmail.com" }
-  s.platform     = :ios,'10.0'
+  s.platform     = :ios,'9.0'
   s.source       = { :git => "https://github.com/iFindTA/SBSwiftUIComponents.git", :tag => "#{s.version}" }
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
   s.framework    = "UIKit","Foundation"
   s.requires_arc = true
   #s.dependency 
