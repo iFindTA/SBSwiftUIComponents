@@ -403,7 +403,7 @@ extension WebBrowser {
                     return
                 }
                 BallLoading.show()
-                SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: imgUri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+                SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUri), options: [], progress: nil) { [weak self](image, data, err, finish) in
                     BallLoading.hide()
                     guard let icon = image else {
                         Kits.makeToast("图片数据错误！")
