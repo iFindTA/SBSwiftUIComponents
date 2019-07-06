@@ -17,8 +17,9 @@ use_frameworks!
 target 'SBSwiftUICoponents' do
 
 #common
-pod 'SDWebImage/Core'
-pod 'DTCoreText', '~> 1.6.21'
+#pod 'SDWebImage/Core'
+pod 'DTCoreText', '~> 1.6.22'
+pod 'AlamofireImage', '~> 3.5.2'
 pod 'SBPullToRefresh', '~> 2.9'
 pod 'EmptyDataSet-Swift', '~> 4.2.0'
 pod 'SJNavigationPopGesture', '~> 1.4.7'

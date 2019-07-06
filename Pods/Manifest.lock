@@ -1,13 +1,15 @@
 PODS:
   - Alamofire (4.8.2)
+  - AlamofireImage (3.5.2):
+    - Alamofire (~> 4.8)
   - CHIPageControl/Jaloro (0.1.7)
-  - DTCoreText (1.6.21):
-    - DTCoreText/Core (= 1.6.21)
+  - DTCoreText (1.6.22):
+    - DTCoreText/Core (= 1.6.22)
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTCoreText/Core (1.6.21):
+  - DTCoreText/Core (1.6.22):
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
@@ -58,14 +60,14 @@ PODS:
     - SBComponents/Macros
   - SBPullToRefresh (2.9)
   - SBToaster (2.1.2)
-  - SDWebImage/Core (4.4.2)
   - SJNavigationPopGesture (1.4.8)
   - SnapKit (4.2.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - AlamofireImage (~> 3.5.2)
   - CHIPageControl/Jaloro (~> 0.1.7)
-  - DTCoreText (~> 1.6.21)
+  - DTCoreText (~> 1.6.22)
   - EmptyDataSet-Swift (~> 4.2.0)
   - FSPagerView (~> 0.8.1)
   - GDPerformanceView-Swift (~> 2.0.2)
@@ -75,12 +77,12 @@ DEPENDENCIES:
   - SBComponents/Kit (~> 0.6.8)
   - SBComponents/SceneRouter (~> 0.6.8)
   - SBPullToRefresh (~> 2.9)
-  - SDWebImage/Core
   - SJNavigationPopGesture (~> 1.4.7)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireImage
     - CHIPageControl
     - DTCoreText
     - DTFoundation
@@ -93,15 +95,15 @@ SPEC REPOS:
     - SBComponents
     - SBPullToRefresh
     - SBToaster
-    - SDWebImage
     - SJNavigationPopGesture
     - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   CHIPageControl: bbe1ddd0c688c02ec65b7f7e7d34551a3d16f37c
-  DTCoreText: e5d688cffc9f6a61eddd1a4f94e2046851230de3
+  DTCoreText: ad5135357a0e792f735970ed67d3ecda8b602d3d
   DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
   EmptyDataSet-Swift: 1fa0b35f530a35f852ecb2b53564728b0c300aaf
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
@@ -112,11 +114,10 @@ SPEC CHECKSUMS:
   SBComponents: e05066b90a23b698d60c158e150acc6b2f1557e7
   SBPullToRefresh: e3c42add2d79c39c34844423e9ee75c8e980eef2
   SBToaster: ffea00ad8c38eb80e6800c0fee5bc9b4c184252b
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SJNavigationPopGesture: 9b2c03b9c5b164e7880cf34386044ca3f1902567
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 9745506d11ba5db42e0deef2710ec78501244a8b
+PODFILE CHECKSUM: 1c2ef9e9b39397ae939714b259fffba43434e6c1
 
 COCOAPODS: 1.7.3

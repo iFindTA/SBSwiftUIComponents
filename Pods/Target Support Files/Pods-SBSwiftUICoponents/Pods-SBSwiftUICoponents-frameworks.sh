@@ -162,6 +162,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework"
@@ -174,13 +175,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SBComponents/SBComponents.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBPullToRefresh/SBPullToRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBToaster/SBToaster.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SJNavigationPopGesture/SJNavigationPopGesture.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework"
@@ -193,7 +194,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SBComponents/SBComponents.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBPullToRefresh/SBPullToRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBToaster/SBToaster.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SJNavigationPopGesture/SJNavigationPopGesture.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"

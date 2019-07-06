@@ -6,8 +6,8 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import SDWebImage
 import SBComponents
+import AlamofireImage
 import IQKeyboardManagerSwift
 
 fileprivate let kInputFont = UIFont.systemFont(ofSize: 13)
@@ -332,8 +332,12 @@ fileprivate class ComInputBar: BaseScene {
         }
     }
     public func update(_ uri: URL?, with placeholder: String?="说点什么吧...") {
-        iconView.sd_setImage(with: uri, completed: nil)
         input.placeholder = placeholder
+        guard let url = uri else {
+            return
+        }
+        //iconView.sd_setImage(with: uri, completed: nil)
+        iconView.af_setImage(withURL: url)
     }
     public func focusOn() {
         input.becomeFirstResponder()

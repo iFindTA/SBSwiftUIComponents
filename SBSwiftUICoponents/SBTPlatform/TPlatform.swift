@@ -7,9 +7,10 @@
 //
 
 import Alamofire
-import SDWebImage
+//import SDWebImage
 import SwiftyJSON
 import SBComponents
+import AlamofireImage
 
 // MARK: - Defines
 public typealias TPShareCallback = (TPlatform)->Void
@@ -516,24 +517,29 @@ extension TPOpen {
     /// 分享链接（sdk）
     private func shareLinkThrid(_ platform: TPlatform, title: String, desciption desc: String, icon uri: String, hybrid link: String) {
         BallLoading.show()
-        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
-            BallLoading.hide()
-            guard let icon = image else {
+        Alamofire.request(uri).responseImage { [weak self](resp) in
+            guard let image = resp.result.value else {
                 let e = BaseError("分享图片数据错误！")
                 self?.callback?(e)
                 return
             }
-            /// compress
-            let compressed = icon.sb_compress(32768)
-            //            guard let compressed = icon.sb_compress(32768) else {
-            //                debugPrint("failed compress")
-            //                let e = BaseError("failed compress")
-            //                self?.callback?(e)
-            //                return
-            //            }
+            /// 压缩
+            let compressed = (image as UIImage).sb_compress(32768)
             /// share
             self?.realShareLink(platform, title: title, desciption: desc, icon: compressed, hybrid: link)
         }
+//        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+//            BallLoading.hide()
+//            guard let icon = image else {
+//                let e = BaseError("分享图片数据错误！")
+//                self?.callback?(e)
+//                return
+//            }
+//            /// compress
+//            let compressed = icon.sb_compress(32768)
+//            /// share
+//            self?.realShareLink(platform, title: title, desciption: desc, icon: compressed, hybrid: link)
+//        }
     }
     private func realShareLink(_ platform: TPlatform, title: String, desciption desc: String, icon source: UIImage, hybrid link: String) {
         if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {
@@ -660,17 +666,27 @@ extension TPOpen {
             return
         }
         BallLoading.show()
-        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
-            BallLoading.hide()
-            guard let icon = image else {
+        Alamofire.request(uri).responseImage { [weak self](resp) in
+            guard let image = resp.result.value else {
                 let e = BaseError("分享图片数据错误！")
                 self?.callback?(e)
                 return
             }
             /// compress
-            let compressed = icon.sb_compress(32768)
+            let compressed = (image as UIImage).sb_compress(32768)
             self?.realShareMusic(platform, title: title, desciption: desc, icon: compressed, hybrid: link, binary: file)
         }
+//        SDWebImageDownloader.shared().downloadImage(with: URL(string: uri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+//            BallLoading.hide()
+//            guard let icon = image else {
+//                let e = BaseError("分享图片数据错误！")
+//                self?.callback?(e)
+//                return
+//            }
+//            /// compress
+//            let compressed = icon.sb_compress(32768)
+//            self?.realShareMusic(platform, title: title, desciption: desc, icon: compressed, hybrid: link, binary: file)
+//        }
     }
     private func realShareMusic(_ platform: TPlatform, title: String, desciption desc: String, icon source: UIImage, hybrid link: String, binary file: String) {
         if platform == .wxSession || platform == .wxTimeline || platform == .wxFavorite {

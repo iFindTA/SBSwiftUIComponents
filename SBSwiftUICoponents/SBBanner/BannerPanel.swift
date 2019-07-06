@@ -6,10 +6,10 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
-import SDWebImage
 import FSPagerView
 import SBComponents
 import CHIPageControl
+import AlamofireImage
 
 fileprivate let BannerCellIdentifier = "banner-base-cell"
 /// banner scale w/h
@@ -46,8 +46,11 @@ public class BannerCell: FSPagerViewCell {
         guard let uriString = img else {
             return
         }
-        let uri = URL(string: uriString)
-        iconView.sd_setImage(with: uri, completed: nil)
+        guard let uri = URL(string: uriString) else {
+            return
+        }
+        iconView.af_setImage(withURL: uri)
+        //iconView.sd_setImage(with: uri, completed: nil)
     }
 }
 

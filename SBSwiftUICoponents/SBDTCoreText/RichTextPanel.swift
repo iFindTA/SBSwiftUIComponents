@@ -6,12 +6,23 @@
 //  Copyright © 2018 nanhu. All rights reserved.
 //
 
+import Alamofire
 import DTCoreText
-import SDWebImage
 import SBComponents
+import AlamofireImage
 
 public let RichDefaultWidth: CGFloat = AppSize.WIDTH_SCREEN - HorizontalOffset*2
 fileprivate let html = "<span style=\"color:#333;font-size:15px;\"><strong>砍价师服务介绍</strong></span><br/><span align=\"right\" style=\"color:#333;font-size:15px;\">我们不是中介。</span><br/> <span style=\"color:#333;font-size:15px;\">我们是一群愿意站在买房人一边的，地产业内人士。</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>砍不下来，不要钱！</strong></span><br/><span style=\"color:#333;font-size:15px;\">类似你请个律师，完全站在你的立场，帮你谈判。我们发心，用立场和专业，改变中国买房人的被动、挨宰局面！</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>服务流程：</strong></span><br/><span style=\"color:#333;font-size:15px;\">1.砍前培训。砍价师教你和中介、业主交流，哪些话能说，哪些话不能说；</span><br/><span style=\"color:#333;font-size:15px;\">2.选砍价师。和砍价师约见，确认服务，并做各方信息梳理，确定谈判策略。</span><br/><span style=\"color:#333;font-size:15px;\">3.现场谈判。砍价师陪你去现场，协助把控谈判进程；在你砍不动时，再继续全力争取最好价格。</span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>收费标准：</strong></span><br/><span style=\"color:#333;font-size:15px;\">记住！砍价是由你自己先砍，砍不动时再由砍价师继续砍；由砍价师多砍下的部分，才按照下列标准收费：</span><br/><span style=\"color:#333;font-size:15px;\"><img src=\"http://cn-qinqimaifang-uat.oss-cn-hangzhou.aliyuncs.com/img/specialist/upload/spcetiicwlz1v_54e2e00fa8a6faf66168571654dbfee2.jpg\" _src=\"http://cn-qinqimaifang-uat.oss-cn-hangzhou.aliyuncs.com/img/specialist/upload/spcetiicwlz1v_54e2e00fa8a6faf66168571654dbfee2.jpg\"></span><span style=\"color:#333;font-size:15px;\"><strong>砍不下来，不收费！</strong></span><br/><br/><span style=\"color:#333;font-size:15px;\"><strong>举个例子：</strong></span><br/><span style=\"color:#333;font-size:15px;\">李先生看好一套房子，经过自己努力将价格砍到300万，砍价师在李先生的基础上将价格谈到270万，成功砍下30万，其中0~5万元阶梯价格部分为5万元，5~10万元阶梯价格部分为5万元，10万元以上阶梯价格部分为20万元，则</span><br/><span style=\"color:#333;font-size:15px;\"><strong>应收服务费：5x30％+5x40%+20x50%=13.5万</strong></span><br/><br/><span style=\"color:#333;font-size:15px;\">百度:<a href=\"http://www.w3school.com.cn\">my testlink</a></span><br/><br/><span style=\"color:#333;font-size:15px;\">电话：<a href=\"tel:4008001234\">my phoneNum</a></span><br/><br/><span style=\"color:#333;font-size:15px;\">我邮箱:<a href=\"mailto:dreamcoffeezs@163.com\">my mail</a></span>"
+
+func get_image_by_alamofire(_ uri: String, handler: @escaping (Data?) -> Void) {
+    Alamofire.request(uri, method: .get).responseData(completionHandler: { (resp) in
+        guard let data = resp.result.value else {
+            handler(nil)
+            return
+        }
+        handler(data)
+    })
+}
 
 /// 富文本panel
 public class RichTextPanel: BaseScene {
@@ -134,13 +145,20 @@ extension RichTextPanel: DTAttributedTextContentViewDelegate {
         imageView.image = imgAttach.image
         imageView.url = imgUri
         if let uri = imgUri?.absoluteString, uri.contains("gif") {
-            SDWebImageDownloader.shared().downloadImage(with: imgUri, options: [], progress: nil) { (icon, data, err, fini) in
-                if let img_data = data {
+            get_image_by_alamofire(uri) { (image) in
+                if let img = image {
                     Macros.executeInMain {
-                        imageView.image = DTAnimatedGIFFromData(img_data)
+                        imageView.image = DTAnimatedGIFFromData(img)
                     }
                 }
             }
+//            SDWebImageDownloader.shared().downloadImage(with: imgUri, options: [], progress: nil) { (icon, data, err, fini) in
+//                if let img_data = data {
+//                    Macros.executeInMain {
+//                        imageView.image = DTAnimatedGIFFromData(img_data)
+//                    }
+//                }
+//            }
         }
         return imageView
     }

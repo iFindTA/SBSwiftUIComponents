@@ -7,8 +7,9 @@
 //
 
 import WebKit
+import Alamofire
 import SBComponents
-import SDWebImage
+import AlamofireImage
 
 public protocol SBWebDelegate: class {
     func didStartLoading()
@@ -403,17 +404,27 @@ extension WebBrowser {
                     return
                 }
                 BallLoading.show()
-                SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUri), options: [], progress: nil) { [weak self](image, data, err, finish) in
-                    BallLoading.hide()
-                    guard let icon = image else {
+                Alamofire.request(imgUri).responseImage { [weak self](resp) in
+                    guard let icon = resp.result.value else {
                         Kits.makeToast("图片数据错误！")
                         return
                     }
                     /// compress
-                    let compressed = icon.sb_compress(32768)
+                    let compressed = (icon as UIImage).sb_compress(32768)
                     /// call activity profile
                     self?.openActivityProfile(url, img: compressed)
                 }
+//                SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUri), options: [], progress: nil) { [weak self](image, data, err, finish) in
+//                    BallLoading.hide()
+//                    guard let icon = image else {
+//                        Kits.makeToast("图片数据错误！")
+//                        return
+//                    }
+//                    /// compress
+//                    let compressed = icon.sb_compress(32768)
+//                    /// call activity profile
+//                    self?.openActivityProfile(url, img: compressed)
+//                }
             }
         }
     }
